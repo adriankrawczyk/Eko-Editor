@@ -1,21 +1,26 @@
 import { fabric } from 'fabric';
+import AddOutline from './AddOutline';
+import GroupWithOutlineEvents from './GroupWithOutlineEvents';
+import AddTextBox from './AddTextBox';
 
 const AddBasicCard = (canvas: fabric.Canvas) => {
   const canvasWidth = canvas.getWidth();
   const canvasHeight = canvas.getHeight();
-  const width = 800;
-  const height = 400;
-  const rectangle = new fabric.Rect({
-    width,
-    height,
-    fill: 'white',
-    left: (canvasWidth - width) / 2,
-    top: (canvasHeight - height) / 2,
-    lockMovementY: true,
-    lockMovementX: true,
-  });
+  const cardWidth = 800;
+  const cardHeight = 400;
 
-  canvas.add(rectangle);
+  const card = new fabric.Rect({
+    width: cardWidth,
+    height: cardHeight,
+    fill: 'white',
+    left: (canvasWidth - cardWidth) / 2,
+    top: (canvasHeight - cardHeight) / 2,
+  });
+  const textBox = AddTextBox(canvas);
+  const outline = AddOutline({ parent: card, canvas, description: 'Body' });
+  const cardGroup = new fabric.Group([card, outline]);
+  const cardGroupWithEvents = GroupWithOutlineEvents({ canvas, parent: cardGroup, outline });
+  canvas.add(cardGroupWithEvents, textBox);
 };
 
 export default AddBasicCard;

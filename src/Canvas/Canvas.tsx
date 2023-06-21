@@ -2,6 +2,7 @@ import { fabric } from 'fabric';
 import { useEffect, useRef } from 'react';
 import SetBackgroundMask from './SetBackgroundMask';
 import AddBasicCard from './AddBasicCard';
+import SetObjectPrototype from './SetObjectPrototype';
 
 const Canvas = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -15,7 +16,10 @@ const Canvas = () => {
       const canvas = new fabric.Canvas(canvasRef.current, {
         width,
         height,
+        selection: false,
       });
+
+      SetObjectPrototype();
       SetBackgroundMask(canvas);
       AddBasicCard(canvas);
     };
