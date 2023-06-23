@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { fabric } from 'fabric';
 import { useEffect, useRef, useContext } from 'react';
 import SetBackgroundMask from './SetBackgroundMask';
@@ -30,7 +31,7 @@ const Canvas = () => {
       setCanvas(canvas);
       SetBackgroundMask(canvas);
       AddBasicCard(canvas);
-      OnSelectionEvents(canvas, fabricContext.setActiveObj);
+      OnSelectionEvents(canvas, fabricContext);
     };
 
     handleResize();
@@ -40,7 +41,7 @@ const Canvas = () => {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, [fabricContext.setActiveObj]);
+  }, []);
 
   return <canvas ref={canvasRef} />;
 };

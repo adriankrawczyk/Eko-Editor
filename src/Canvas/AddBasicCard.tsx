@@ -19,7 +19,7 @@ const AddBasicCard = (canvas: fabric.Canvas) => {
   });
   const textBox = AddTextBox(canvas);
   const outline = AddOutline({ parent: card, canvas, description: 'Body' });
-  const cardGroup = new fabric.Group([card, outline], { shape: 'card' } as CustomObjectOptions);
+  const cardGroup = new fabric.Group([card, outline], { shape: 'card', outline, card } as CustomObjectOptions);
   const cardGroupWithEvents = GroupWithOutlineEvents({ canvas, parent: cardGroup, outline });
   canvas.add(cardGroupWithEvents, textBox);
 };

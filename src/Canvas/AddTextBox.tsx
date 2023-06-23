@@ -7,7 +7,7 @@ const AddTextBox = (canvas: fabric.Canvas) => {
   const canvasWidth = canvas.getWidth();
   const canvasHeight = canvas.getHeight();
   const textBoxWidth = 600;
-  const textBoxHeight = 300;
+  const textBoxHeight = 200;
   const textBoxLeft = (canvasWidth - textBoxWidth) / 2;
   const textBoxTop = (canvasHeight - textBoxHeight) / 2;
   const defaultText = 'Text...';
@@ -29,6 +29,8 @@ const AddTextBox = (canvas: fabric.Canvas) => {
   outline.addWithUpdate(iText);
   const textBoxGroup = new fabric.Group([textBox, outline], {
     shape: 'text',
+    text: iText,
+    outline,
   } as CustomObjectOptions);
   const textBoxGroupWithEvents = GroupWithOutlineEvents({ canvas, parent: textBoxGroup, outline });
   canvas.on('mouse:down', () => {
