@@ -1,9 +1,9 @@
+/* eslint-disable no-undef */
 /** @type {import('tailwindcss').Config} */
-export default {
-  content: [],
+module.exports = {
+  content: ['./src/**/*.{html,js,tsx,ts}'],
   theme: {
     extend: {},
   },
   plugins: [],
-}
-
+};

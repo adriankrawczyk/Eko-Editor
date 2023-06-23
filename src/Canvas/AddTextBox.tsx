@@ -1,6 +1,7 @@
 import { fabric } from 'fabric';
 import AddOutline from './AddOutline';
 import GroupWithOutlineEvents from './GroupWithOutlineEvents';
+import CustomObjectOptions from './CustomObjectOptions';
 
 const AddTextBox = (canvas: fabric.Canvas) => {
   const canvasWidth = canvas.getWidth();
@@ -26,7 +27,9 @@ const AddTextBox = (canvas: fabric.Canvas) => {
   });
   const outline = AddOutline({ parent: textBox, canvas, description: 'Text' });
   outline.addWithUpdate(iText);
-  const textBoxGroup = new fabric.Group([textBox, outline]);
+  const textBoxGroup = new fabric.Group([textBox, outline], {
+    shape: 'text',
+  } as CustomObjectOptions);
   const textBoxGroupWithEvents = GroupWithOutlineEvents({ canvas, parent: textBoxGroup, outline });
   canvas.on('mouse:down', () => {
     if (canvas.getActiveObject() === textBoxGroupWithEvents) return;

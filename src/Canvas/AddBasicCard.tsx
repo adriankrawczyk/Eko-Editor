@@ -2,6 +2,7 @@ import { fabric } from 'fabric';
 import AddOutline from './AddOutline';
 import GroupWithOutlineEvents from './GroupWithOutlineEvents';
 import AddTextBox from './AddTextBox';
+import CustomObjectOptions from './CustomObjectOptions';
 
 const AddBasicCard = (canvas: fabric.Canvas) => {
   const canvasWidth = canvas.getWidth();
@@ -18,7 +19,7 @@ const AddBasicCard = (canvas: fabric.Canvas) => {
   });
   const textBox = AddTextBox(canvas);
   const outline = AddOutline({ parent: card, canvas, description: 'Body' });
-  const cardGroup = new fabric.Group([card, outline]);
+  const cardGroup = new fabric.Group([card, outline], { shape: 'card' } as CustomObjectOptions);
   const cardGroupWithEvents = GroupWithOutlineEvents({ canvas, parent: cardGroup, outline });
   canvas.add(cardGroupWithEvents, textBox);
 };
