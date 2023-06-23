@@ -6,20 +6,28 @@ interface GroupWithOutlineEventsParams {
 
 const GroupWithOutlineEvents = ({ canvas, parent, outline }: GroupWithOutlineEventsParams) => {
   const group = parent;
-  group.on('mouseover', () => {
-    outline.animate('opacity', 1, {
-      duration: 150,
-      onChange: canvas.renderAll.bind(canvas),
-    });
+
+  canvas.on('mouse:over', (event) => {
+    const target = event.target;
+    if (target === group) {
+      outline.animate('opacity', 1, {
+        duration: 150,
+        onChange: canvas.renderAll.bind(canvas),
+      });
+    }
   });
 
-  group.on('mouseout', () => {
-    if (group === canvas.getActiveObject()) return;
-    outline.animate('opacity', 0, {
-      duration: 150,
-      onChange: canvas.renderAll.bind(canvas),
-    });
+  canvas.on('mouse:out', (event) => {
+    const target = event.target;
+    if (target === group && group !== canvas.getActiveObject()) {
+      outline.animate('opacity', 0, {
+        duration: 150,
+        onChange: canvas.renderAll.bind(canvas),
+      });
+    }
   });
+
   return group;
 };
+
 export default GroupWithOutlineEvents;

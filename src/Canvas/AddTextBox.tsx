@@ -6,7 +6,7 @@ import CustomObjectOptions from './CustomObjectOptions';
 const AddTextBox = (canvas: fabric.Canvas) => {
   const canvasWidth = canvas.getWidth();
   const canvasHeight = canvas.getHeight();
-  const textBoxWidth = 600;
+  const textBoxWidth = 700;
   const textBoxHeight = 200;
   const textBoxLeft = (canvasWidth - textBoxWidth) / 2;
   const textBoxTop = (canvasHeight - textBoxHeight) / 2;
@@ -26,13 +26,15 @@ const AddTextBox = (canvas: fabric.Canvas) => {
     editable: true,
   });
   const outline = AddOutline({ parent: textBox, canvas, description: 'Text' });
-  outline.addWithUpdate(iText);
+
   const textBoxGroup = new fabric.Group([textBox, outline], {
     shape: 'text',
     text: iText,
     outline,
   } as CustomObjectOptions);
+  textBoxGroup.addWithUpdate(iText);
   const textBoxGroupWithEvents = GroupWithOutlineEvents({ canvas, parent: textBoxGroup, outline });
+
   canvas.on('mouse:down', () => {
     if (canvas.getActiveObject() === textBoxGroupWithEvents) return;
     iText.exitEditing();
