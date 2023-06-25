@@ -1,7 +1,7 @@
 import React from 'react';
 import { renderNumericInput, renderColor } from './RightbarUtils';
 import { FabricContextProps } from '../App';
-import { canvas } from '../Canvas/canvasInstance';
+import { canvas } from '../Canvas/CanvasInstance';
 import CustomObject from '../Canvas/CustomObject';
 
 interface CardProperties {

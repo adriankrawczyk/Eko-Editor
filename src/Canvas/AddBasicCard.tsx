@@ -3,13 +3,17 @@ import AddOutline from './AddOutline';
 import GroupWithOutlineEvents from './GroupWithOutlineEvents';
 import AddTextBox from './AddTextBox';
 import CustomObjectOptions from './CustomObjectOptions';
-
+import CustomObject from './CustomObject';
+import MainObject from './MainObject';
+let mainCard: CustomObject;
+const setMainCard = (newMainCard: CustomObject) => {
+  mainCard = newMainCard;
+};
 const AddBasicCard = (canvas: fabric.Canvas) => {
   const canvasWidth = canvas.getWidth();
   const canvasHeight = canvas.getHeight();
   const cardWidth = 800;
   const cardHeight = 400;
-
   const card = new fabric.Rect({
     width: cardWidth,
     height: cardHeight,
@@ -17,11 +21,15 @@ const AddBasicCard = (canvas: fabric.Canvas) => {
     left: (canvasWidth - cardWidth) / 2,
     top: (canvasHeight - cardHeight) / 2,
   });
-  const textBox = AddTextBox(canvas);
-  const outline = AddOutline({ parent: card, canvas, description: 'Body' });
+  const textBox = AddTextBox(canvasWidth / 2, canvasHeight / 2);
+  const outline = AddOutline({ parent: card, description: 'Body' });
   const cardGroup = new fabric.Group([card, outline], { shape: 'card', outline, card } as CustomObjectOptions);
-  const cardGroupWithEvents = GroupWithOutlineEvents({ canvas, parent: cardGroup, outline });
+  const cardGroupWithEvents = GroupWithOutlineEvents({ canvas, parent: cardGroup, outline }) as fabric.Group;
+
+  mainCard = cardGroupWithEvents as unknown as MainObject;
+  mainCard['elements'] = [textBox];
+
   canvas.add(cardGroupWithEvents, textBox);
 };
 
-export default AddBasicCard;
+export { AddBasicCard, mainCard, setMainCard };

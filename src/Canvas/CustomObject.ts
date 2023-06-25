@@ -1,4 +1,5 @@
 interface CustomObject extends fabric.Object {
+  [x: string]: any;
   shape?: string;
   outline?: fabric.Object;
   text?: fabric.Object;

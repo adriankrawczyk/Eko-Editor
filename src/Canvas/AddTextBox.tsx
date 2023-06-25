@@ -2,30 +2,28 @@ import { fabric } from 'fabric';
 import AddOutline from './AddOutline';
 import GroupWithOutlineEvents from './GroupWithOutlineEvents';
 import CustomObjectOptions from './CustomObjectOptions';
+import { canvas } from './CanvasInstance';
 
-const AddTextBox = (canvas: fabric.Canvas) => {
-  const canvasWidth = canvas.getWidth();
-  const canvasHeight = canvas.getHeight();
+const AddTextBox = (left: number, top: number) => {
   const textBoxWidth = 700;
   const textBoxHeight = 200;
-  const textBoxLeft = (canvasWidth - textBoxWidth) / 2;
-  const textBoxTop = (canvasHeight - textBoxHeight) / 2;
+
   const defaultText = 'Text...';
   const textBox = new fabric.Rect({
     width: textBoxWidth,
     height: textBoxHeight,
     fill: 'white',
-    left: textBoxLeft,
-    top: textBoxTop,
+    left: left - textBoxWidth / 2,
+    top: top - textBoxHeight / 2,
   });
   const iTextFontSize = 40;
   const iText = new fabric.IText(defaultText, {
-    left: textBoxLeft + iTextFontSize / 2,
-    top: textBoxTop + textBoxHeight / 2 - iTextFontSize / 2,
+    left: left - textBoxWidth / 2 + iTextFontSize,
+    top,
     fontSize: iTextFontSize,
     editable: true,
   });
-  const outline = AddOutline({ parent: textBox, canvas, description: 'Text' });
+  const outline = AddOutline({ parent: textBox, description: 'Text' });
 
   const textBoxGroup = new fabric.Group([textBox, outline], {
     shape: 'text',

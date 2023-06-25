@@ -1,18 +1,17 @@
 import { fabric } from 'fabric';
 
 interface AddOutlineParams {
-  canvas: fabric.Canvas;
   parent: fabric.Object;
   description: string;
 }
-const AddOutline = ({ canvas, description, parent }: AddOutlineParams) => {
-  const canvasWidth = canvas.getWidth();
-  const canvasHeight = canvas.getHeight();
+const AddOutline = ({ description, parent }: AddOutlineParams) => {
   const outlineMargin = 30;
   const outlineWidth = (parent.width as number) - outlineMargin;
   const outlineHeight = (parent.height as number) - outlineMargin;
-  const bodyOutlineLeft = (canvasWidth - outlineWidth) / 2;
-  const bodyOutlineTop = (canvasHeight - outlineHeight) / 2;
+  const left = parent.left as number;
+  const top = parent.top as number;
+  const bodyOutlineLeft = left + outlineMargin / 2;
+  const bodyOutlineTop = top + outlineMargin / 2;
 
   const bodyOutline = new fabric.Rect({
     left: bodyOutlineLeft,

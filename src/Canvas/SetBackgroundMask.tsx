@@ -7,7 +7,7 @@ const SetBackgroundMask = (canvas: fabric.Canvas) => {
     const pattern = new fabric.Pattern({
       source: image.getElement() as HTMLImageElement,
       repeat: 'repeat',
-    });
+    }); 
 
     canvas.setBackgroundColor(pattern, () => {
       canvas.requestRenderAll();
