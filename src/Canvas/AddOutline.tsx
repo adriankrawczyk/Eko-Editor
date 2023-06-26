@@ -4,6 +4,7 @@ interface AddOutlineParams {
   parent: fabric.Object;
   description: string;
 }
+
 const AddOutline = ({ description, parent }: AddOutlineParams) => {
   const outlineMargin = 30;
   const outlineWidth = (parent.width as number) - outlineMargin;
@@ -18,16 +19,17 @@ const AddOutline = ({ description, parent }: AddOutlineParams) => {
     top: bodyOutlineTop,
     width: outlineWidth,
     height: outlineHeight,
-    stroke: 'rgba(10,180,255,255)',
+    stroke: 'rgba(10, 180, 255, 255)',
     strokeWidth: 1,
     fill: 'transparent',
   });
+
   const textBackground = new fabric.Rect({
     left: bodyOutlineLeft,
     top: bodyOutlineTop,
     width: 60,
     height: 40,
-    fill: 'rgba(10,180,255,255)',
+    fill: 'rgba(10, 180, 255, 255)',
   });
 
   const text = new fabric.Text(description, {

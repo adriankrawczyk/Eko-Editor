@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
+import ReRenderElements from './ReRenderElements';
+import { mainCard } from '../Canvas/AddBasicCard';
 import AddTextBox from '../Canvas/AddTextBox';
 import { canvas } from '../Canvas/CanvasInstance';
-import { AddBasicCard, mainCard, setMainCard } from '../Canvas/AddBasicCard';
-import AddOutline from '../Canvas/AddOutline';
-import GroupWithOutlineEvents from '../Canvas/GroupWithOutlineEvents';
-import CustomObject from '../Canvas/CustomObject';
 
 const AddingDropdown: React.FC = () => {
   const [menuVisible, setMenuVisible] = useState(false);
@@ -18,34 +16,12 @@ const AddingDropdown: React.FC = () => {
       text: 'Text',
       onClick: () => {
         const TEXT_BOX_HEIGHT = 200;
-        const BORDER_MARGIN = 30;
         const elements = mainCard['elements'];
         const lastElement = elements[elements.length - 1];
         const textBox = AddTextBox(canvas.getWidth() / 2, lastElement.top + TEXT_BOX_HEIGHT * 1.5);
         canvas.add(textBox);
         elements.push(textBox);
-        elements.forEach((element: fabric.Group) => {
-          if (element.top) {
-            element.top -= TEXT_BOX_HEIGHT / 2;
-            element.setCoords().addWithUpdate();
-          }
-        });
-        const height = elements.length * TEXT_BOX_HEIGHT + TEXT_BOX_HEIGHT * 0.75;
-        mainCard.height = height;
-        mainCard.top = (canvas.getHeight() - height) / 2;
-        mainCard['remove'](mainCard.outline);
-        const outline = AddOutline({ description: 'Body', parent: mainCard });
-        mainCard['addWithUpdate'](outline);
-        mainCard.outline = outline;
-        canvas.remove(mainCard);
-        const newMainCard = GroupWithOutlineEvents({ canvas, parent: mainCard, outline }) as CustomObject;
-        canvas.add(newMainCard);
-        newMainCard.sendToBack();
-        if (!newMainCard.outline || !newMainCard.card) return;
-        const newTop = (newMainCard.outline.top as number) - BORDER_MARGIN / 2;
-        newMainCard.card.set({ height, top: newTop });
-        setMainCard(newMainCard);
-        canvas.requestRenderAll();
+        ReRenderElements(true);
       },
     },
   ];

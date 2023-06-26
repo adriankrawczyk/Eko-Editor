@@ -56,6 +56,8 @@ const OnSelectionEvents = (canvas: fabric.Canvas, fabricContext: FabricContextPr
     if (e.deselected && e.deselected[0].type === 'group') {
       const parent = e.deselected[0] as CustomObject;
       fadeOut(parent, canvas);
+      const { setRightbarContent } = fabricContext;
+      setRightbarContent(<></>);
     }
   });
 };

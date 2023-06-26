@@ -3,6 +3,7 @@ import { FabricContext } from '../App';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import AddingDropdown from './AddingDropdown';
+import DeleteButton from './DeleteButton';
 const Rightbar: React.FC = () => {
   const fabricContext = useContext(FabricContext);
 
@@ -10,7 +11,10 @@ const Rightbar: React.FC = () => {
     <div className='fixed top-0 right-0 h-full w-80 bg-white border-l border-gray-300'>
       <div className={`flex items-center justify-between p-4 border-b border-gray-200`}>
         <h2 className='text-lg font-semibold'>Settings</h2>
-        <AddingDropdown />
+        <div className='flex gap-4'>
+          <DeleteButton />
+          <AddingDropdown />
+        </div>
       </div>
       <div className={`p-4`}>{fabricContext.rightbarContent}</div>
     </div>
