@@ -8,6 +8,7 @@ const GroupWithOutlineEvents = ({ canvas, parent, outline }: GroupWithOutlineEve
   const group = parent;
 
   canvas.on('mouse:over', (event) => {
+    if (canvas.getActiveObject()) return;
     const target = event.target;
     if (target === group) {
       outline.animate('opacity', 1, {

@@ -3,6 +3,7 @@ import ReRenderElements from './ReRenderElements';
 import { mainCard } from '../Canvas/Elements/MainCard/AddBasicCard';
 import AddTextBox from '../Canvas/Elements/TextBox/AddTextBox';
 import { canvas } from '../Canvas/CanvasInstance';
+import AddButtonBox from '../Canvas/Elements/ButtonBox/AddButtonBox';
 
 const AddingDropdown: React.FC = () => {
   const [menuVisible, setMenuVisible] = useState(false);
@@ -10,19 +11,33 @@ const AddingDropdown: React.FC = () => {
   const handleAddButtonClick = () => {
     setMenuVisible(!menuVisible);
   };
+  const addElement = (type: string) => {
+    const elements = mainCard['elements'];
+    const lastElement = elements[elements.length - 1];
+    let newElement;
+    if (type === 'text') {
+      const TEXT_BOX_HEIGHT = 200;
+      newElement = AddTextBox(canvas.getWidth() / 2, lastElement.top + TEXT_BOX_HEIGHT * 1.5);
+    } else if (type === 'button') {
+      const BUTTON_BOX_HEIGHT = 200;
+      const BUTTON_WIDTH = 100;
+      newElement = AddButtonBox(canvas.getWidth() / 2, lastElement.top + BUTTON_BOX_HEIGHT * 1.5);
+    }
+    if (newElement) {
+      canvas.add(newElement);
+      elements.push(newElement);
+      ReRenderElements(true);
+    }
+  };
 
   const options = [
     {
       text: 'Text',
-      onClick: () => {
-        const TEXT_BOX_HEIGHT = 200;
-        const elements = mainCard['elements'];
-        const lastElement = elements[elements.length - 1];
-        const textBox = AddTextBox(canvas.getWidth() / 2, lastElement.top + TEXT_BOX_HEIGHT * 1.5);
-        canvas.add(textBox);
-        elements.push(textBox);
-        ReRenderElements(true);
-      },
+      onClick: () => addElement('text'),
+    },
+    {
+      text: 'Button',
+      onClick: () => addElement('button'),
     },
   ];
 

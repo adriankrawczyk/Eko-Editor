@@ -7,7 +7,7 @@ import CustomObject from '../Canvas/Elements/Logic/CustomObject';
 
 const ReRenderElements = (add: boolean) => {
   const TEXT_BOX_HEIGHT = 200;
-  const BORDER_MARGIN = 30;
+  const BORDER_MARGIN = 0;
   const elements = mainCard['elements'];
   const height = elements.length * TEXT_BOX_HEIGHT + TEXT_BOX_HEIGHT * 0.75;
   mainCard.height = height;

@@ -6,7 +6,7 @@ interface AddOutlineParams {
 }
 
 const AddOutline = ({ description, parent }: AddOutlineParams) => {
-  const outlineMargin = 30;
+  const outlineMargin = 0;
   const outlineWidth = (parent.width as number) - outlineMargin;
   const outlineHeight = (parent.height as number) - outlineMargin;
   const left = parent.left as number;
@@ -33,11 +33,14 @@ const AddOutline = ({ description, parent }: AddOutlineParams) => {
   });
 
   const text = new fabric.Text(description, {
-    left: bodyOutlineLeft + 10,
+    left: bodyOutlineLeft + (10 - description.length) * 2,
     top: bodyOutlineTop + 10,
+    width: textBackground.width,
+    height: textBackground.height,
     fontSize: 16,
     fill: 'white',
     fontFamily: 'arial',
+    textAlign: 'center',
   });
 
   const bodyGroup = new fabric.Group([bodyOutline, textBackground, text], {
