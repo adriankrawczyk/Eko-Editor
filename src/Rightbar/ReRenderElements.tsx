@@ -9,10 +9,8 @@ const ReRenderElements = (add: boolean) => {
   const TEXT_BOX_HEIGHT = 200;
   const BORDER_MARGIN = 30;
   const elements = mainCard['elements'];
-
   const height = elements.length * TEXT_BOX_HEIGHT + TEXT_BOX_HEIGHT * 0.75;
   mainCard.height = height;
-
   mainCard.top = (canvas.getHeight() - height) / 2;
   mainCard['remove'](mainCard.outline);
   const outline = AddOutline({ description: 'Body', parent: mainCard });
@@ -25,7 +23,6 @@ const ReRenderElements = (add: boolean) => {
   if (!newMainCard.outline || !newMainCard.card) return;
   const newTop = (newMainCard.outline.top as number) - BORDER_MARGIN / 2;
   newMainCard.card.set({ height, top: newTop });
-
   setMainCard(newMainCard);
   elements.forEach((element: fabric.Group, index: number) => {
     if (element.top && mainCard.top && mainCard.height) {

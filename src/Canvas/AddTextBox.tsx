@@ -35,6 +35,7 @@ const AddTextBox = (left: number, top: number) => {
 
   canvas.on('mouse:down', () => {
     if (canvas.getActiveObject() === textBoxGroupWithEvents) return;
+    if (iText.text === '') iText.set({ text: defaultText });
     iText.exitEditing();
   });
   textBoxGroup.on('mousedown', () => {
