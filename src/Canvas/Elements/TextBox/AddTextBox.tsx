@@ -1,8 +1,8 @@
 import { fabric } from 'fabric';
-import AddOutline from './AddOutline';
-import GroupWithOutlineEvents from './GroupWithOutlineEvents';
-import CustomObjectOptions from './CustomObjectOptions';
-import { canvas } from './CanvasInstance';
+import AddOutline from '../Outline/AddOutline';
+import GroupWithOutlineEvents from '../Logic/GroupWithOutlineEvents';
+import CustomObjectOptions from '../Logic/CustomObjectOptions';
+import { canvas } from '../../CanvasInstance';
 
 const AddTextBox = (left: number, top: number) => {
   const textBoxWidth = 700;

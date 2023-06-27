@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { renderNumericInput, renderDropdown, renderColor } from './RightbarUtils';
 import { FabricContext, FabricContextProps } from '../App';
 import { canvas } from '../Canvas/CanvasInstance';
-import CustomObject from '../Canvas/CustomObject';
+import CustomObject from '../Canvas/Elements/Logic/CustomObject';
 import { IText } from 'fabric/fabric-impl';
 
 interface TextProperties {

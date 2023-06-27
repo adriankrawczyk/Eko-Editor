@@ -4,7 +4,7 @@ import AddingDropdown from './AddingDropdown';
 import DeleteButton from './DeleteButton';
 import ArrowButton from './ArrowButton';
 import { canvas } from '../Canvas/CanvasInstance';
-import { mainCard } from '../Canvas/AddBasicCard';
+import { mainCard } from '../Canvas/Elements/MainCard/AddBasicCard';
 
 const Rightbar: React.FC = () => {
   const fabricContext = useContext(FabricContext);

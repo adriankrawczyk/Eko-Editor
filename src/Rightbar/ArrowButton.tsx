@@ -1,10 +1,9 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
-import { mainCard } from '../Canvas/AddBasicCard';
+import { mainCard } from '../Canvas/Elements/MainCard/AddBasicCard';
 import { canvas } from '../Canvas/CanvasInstance';
-import CustomObject from '../Canvas/CustomObject';
-import ReRenderObject from '../Canvas/ReRenderObject';
+import CustomObject from '../Canvas/Elements/Logic/CustomObject';
 import ReRenderElements from './ReRenderElements';
 
 interface ArrowButtonProps {
@@ -26,7 +25,7 @@ const ArrowButton: React.FC<ArrowButtonProps> = ({ isUp }) => {
       const temp = elements[activeIndex + 1];
       elements[activeIndex + 1] = activeObject;
       elements[activeIndex] = temp;
-    }
+    } else return;
     ReRenderElements(true);
   };
 

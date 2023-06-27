@@ -1,9 +1,9 @@
 import { fabric } from 'fabric';
-import AddOutline from './AddOutline';
-import GroupWithOutlineEvents from './GroupWithOutlineEvents';
-import AddTextBox from './AddTextBox';
-import CustomObjectOptions from './CustomObjectOptions';
-import CustomObject from './CustomObject';
+import AddOutline from '../Outline/AddOutline';
+import GroupWithOutlineEvents from '../Logic/GroupWithOutlineEvents';
+import AddTextBox from '../TextBox/AddTextBox';
+import CustomObjectOptions from '../Logic/CustomObjectOptions';
+import CustomObject from '../Logic/CustomObject';
 import MainObject from './MainObject';
 let mainCard: CustomObject;
 const setMainCard = (newMainCard: CustomObject) => {

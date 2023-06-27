@@ -1,8 +1,8 @@
 import { fabric } from 'fabric';
 import CustomObject from './CustomObject';
-import { FabricContextProps } from '../App';
-import TextRightbar from '../Rightbar/TextRightbar';
-import CardRightbar from '../Rightbar/CardRightbar';
+import { FabricContextProps } from '../../../App';
+import TextRightbar from '../../../Rightbar/TextRightbar';
+import CardRightbar from '../../../Rightbar/CardRightbar';
 
 const handleSelection = (selectedObject: CustomObject, fabricContext: FabricContextProps) => {
   if (!selectedObject) return;

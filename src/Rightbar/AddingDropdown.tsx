@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ReRenderElements from './ReRenderElements';
-import { mainCard } from '../Canvas/AddBasicCard';
-import AddTextBox from '../Canvas/AddTextBox';
+import { mainCard } from '../Canvas/Elements/MainCard/AddBasicCard';
+import AddTextBox from '../Canvas/Elements/TextBox/AddTextBox';
 import { canvas } from '../Canvas/CanvasInstance';
 
 const AddingDropdown: React.FC = () => {

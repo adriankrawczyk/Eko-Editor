@@ -2,12 +2,12 @@
 import { fabric } from 'fabric';
 import { useEffect, useRef, useContext } from 'react';
 import SetBackgroundMask from './SetBackgroundMask';
-import { AddBasicCard } from './AddBasicCard';
+import { AddBasicCard } from './Elements/MainCard/AddBasicCard';
 import SetObjectPrototype from './SetObjectPrototype';
-import OnSelectionEvents from './OnSelectionEvents';
+import OnSelectionEvents from './Elements/Logic/OnSelectionEvents';
 import { setCanvas } from './CanvasInstance';
 import { FabricContext } from '../App';
-import AddTextBox from './AddTextBox';
+import AddTextBox from './Elements/TextBox/AddTextBox';
 
 let canvas: fabric.Canvas;
 

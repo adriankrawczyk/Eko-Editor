@@ -1,9 +1,9 @@
-import AddTextBox from '../Canvas/AddTextBox';
+import AddTextBox from '../Canvas/Elements/TextBox/AddTextBox';
 import { canvas } from '../Canvas/CanvasInstance';
-import { mainCard, setMainCard } from '../Canvas/AddBasicCard';
-import AddOutline from '../Canvas/AddOutline';
-import GroupWithOutlineEvents from '../Canvas/GroupWithOutlineEvents';
-import CustomObject from '../Canvas/CustomObject';
+import { mainCard, setMainCard } from '../Canvas/Elements/MainCard/AddBasicCard';
+import AddOutline from '../Canvas/Elements/Outline/AddOutline';
+import GroupWithOutlineEvents from '../Canvas/Elements/Logic/GroupWithOutlineEvents';
+import CustomObject from '../Canvas/Elements/Logic/CustomObject';
 
 const ReRenderElements = (add: boolean) => {
   const TEXT_BOX_HEIGHT = 200;

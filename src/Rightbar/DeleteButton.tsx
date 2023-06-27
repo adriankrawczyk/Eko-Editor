@@ -2,8 +2,8 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { canvas } from '../Canvas/CanvasInstance';
-import CustomObject from '../Canvas/CustomObject';
-import { mainCard } from '../Canvas/AddBasicCard';
+import CustomObject from '../Canvas/Elements/Logic/CustomObject';
+import { mainCard } from '../Canvas/Elements/MainCard/AddBasicCard';
 import ReRenderElements from './ReRenderElements';
 
 const DeleteButton: React.FC = () => {

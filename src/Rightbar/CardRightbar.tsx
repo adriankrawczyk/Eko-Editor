@@ -2,7 +2,7 @@ import React from 'react';
 import { renderNumericInput, renderColor } from './RightbarUtils';
 import { FabricContextProps } from '../App';
 import { canvas } from '../Canvas/CanvasInstance';
-import CustomObject from '../Canvas/CustomObject';
+import CustomObject from '../Canvas/Elements/Logic/CustomObject';
 
 interface CardProperties {
   width: number;
