@@ -10,7 +10,7 @@ const ReRenderElements = (add: boolean) => {
   const BORDER_MARGIN = 0;
   const OUTLINE_MARGIN = 20;
   const elements = mainCard['elements'];
-  const height = elements.length * TEXT_BOX_HEIGHT + OUTLINE_MARGIN;
+  const height = elements.length * TEXT_BOX_HEIGHT + OUTLINE_MARGIN * 2;
   mainCard.height = height;
   mainCard.top = (canvas.getHeight() - height) / 2;
   mainCard['remove'](mainCard.outline);
