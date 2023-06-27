@@ -5,7 +5,7 @@ import CustomObjectOptions from '../Logic/CustomObjectOptions';
 import { canvas } from '../../CanvasInstance';
 
 const AddTextBox = (left: number, top: number) => {
-  const textBoxWidth = 700;
+  const textBoxWidth = 800;
   const textBoxHeight = 200;
 
   const defaultText = 'Text...';

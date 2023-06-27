@@ -5,7 +5,7 @@ import CustomObjectOptions from '../Logic/CustomObjectOptions';
 import { canvas } from '../../CanvasInstance';
 
 const AddButtonBox = (left: number, top: number) => {
-  const containerWidth = 700;
+  const containerWidth = 800;
   const containerHeight = 200;
   const buttonWidth = 300;
   const buttonHeight = 150;

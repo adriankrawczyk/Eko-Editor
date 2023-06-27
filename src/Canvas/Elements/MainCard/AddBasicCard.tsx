@@ -13,7 +13,7 @@ const AddBasicCard = (canvas: fabric.Canvas) => {
   const canvasWidth = canvas.getWidth();
   const canvasHeight = canvas.getHeight();
   const cardWidth = 800;
-  const cardHeight = 400;
+  const cardHeight = 225;
   const card = new fabric.Rect({
     width: cardWidth,
     height: cardHeight,

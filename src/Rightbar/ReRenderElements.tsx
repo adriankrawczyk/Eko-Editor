@@ -8,8 +8,9 @@ import CustomObject from '../Canvas/Elements/Logic/CustomObject';
 const ReRenderElements = (add: boolean) => {
   const TEXT_BOX_HEIGHT = 200;
   const BORDER_MARGIN = 0;
+  const OUTLINE_MARGIN = 20;
   const elements = mainCard['elements'];
-  const height = elements.length * TEXT_BOX_HEIGHT + TEXT_BOX_HEIGHT * 0.75;
+  const height = elements.length * TEXT_BOX_HEIGHT + OUTLINE_MARGIN;
   mainCard.height = height;
   mainCard.top = (canvas.getHeight() - height) / 2;
   mainCard['remove'](mainCard.outline);
@@ -26,10 +27,11 @@ const ReRenderElements = (add: boolean) => {
   setMainCard(newMainCard);
   elements.forEach((element: fabric.Group, index: number) => {
     if (element.top && mainCard.top && mainCard.height) {
-      element.top = mainCard.top + index * TEXT_BOX_HEIGHT + (add ? TEXT_BOX_HEIGHT / 2 : TEXT_BOX_HEIGHT) - BORDER_MARGIN;
+      element.top = mainCard.top + index * TEXT_BOX_HEIGHT + (add ? OUTLINE_MARGIN : OUTLINE_MARGIN + TEXT_BOX_HEIGHT / 2) + OUTLINE_MARGIN;
       element.setCoords().addWithUpdate();
     }
   });
+
   canvas.requestRenderAll();
 };
 export default ReRenderElements;

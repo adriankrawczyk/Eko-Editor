@@ -4,6 +4,7 @@ import { mainCard } from '../Canvas/Elements/MainCard/AddBasicCard';
 import AddTextBox from '../Canvas/Elements/TextBox/AddTextBox';
 import { canvas } from '../Canvas/CanvasInstance';
 import AddButtonBox from '../Canvas/Elements/ButtonBox/AddButtonBox';
+import AddContentBox from '../Canvas/Elements/ContentBox/AddContentBox';
 
 const AddingDropdown: React.FC = () => {
   const [menuVisible, setMenuVisible] = useState(false);
@@ -15,14 +16,23 @@ const AddingDropdown: React.FC = () => {
     const elements = mainCard['elements'];
     const lastElement = elements[elements.length - 1];
     let newElement;
-    if (type === 'text') {
-      const TEXT_BOX_HEIGHT = 200;
-      newElement = AddTextBox(canvas.getWidth() / 2, lastElement.top + TEXT_BOX_HEIGHT * 1.5);
-    } else if (type === 'button') {
-      const BUTTON_BOX_HEIGHT = 200;
-      const BUTTON_WIDTH = 100;
-      newElement = AddButtonBox(canvas.getWidth() / 2, lastElement.top + BUTTON_BOX_HEIGHT * 1.5);
+    const TEXT_BOX_HEIGHT = 200;
+    const BUTTON_BOX_HEIGHT = 200;
+    const CONTENT_BOX_HEIGHT = 200;
+    switch (type) {
+      case 'text':
+        newElement = AddTextBox(canvas.getWidth() / 2, lastElement.top + TEXT_BOX_HEIGHT * 1.5);
+        break;
+      case 'button':
+        newElement = AddButtonBox(canvas.getWidth() / 2, lastElement.top + BUTTON_BOX_HEIGHT * 1.5);
+        break;
+      case 'content':
+        newElement = AddContentBox(canvas.getWidth() / 2, lastElement.top + CONTENT_BOX_HEIGHT * 1.5);
+        break;
+      default:
+        break;
     }
+
     if (newElement) {
       canvas.add(newElement);
       elements.push(newElement);
@@ -32,6 +42,10 @@ const AddingDropdown: React.FC = () => {
 
   const options = [
     {
+      text: 'Content',
+      onClick: () => addElement('content'),
+    },
+    {
       text: 'Text',
       onClick: () => addElement('text'),
     },
@@ -40,7 +54,6 @@ const AddingDropdown: React.FC = () => {
       onClick: () => addElement('button'),
     },
   ];
-
   return (
     <div style={{ position: 'relative' }}>
       <button className='bg-gray-500 hover:bg-gray-600 text-white rounded-full w-10 h-10 flex items-center justify-center' onClick={handleAddButtonClick}>

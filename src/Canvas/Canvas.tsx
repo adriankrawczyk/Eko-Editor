@@ -7,7 +7,7 @@ import SetObjectPrototype from './SetObjectPrototype';
 import OnSelectionEvents from './Elements/Logic/OnSelectionEvents';
 import { setCanvas } from './CanvasInstance';
 import { FabricContext } from '../App';
-import AddTextBox from './Elements/TextBox/AddTextBox';
+import ReRenderElements from '../Rightbar/ReRenderElements';
 
 let canvas: fabric.Canvas;
 
@@ -32,8 +32,8 @@ const Canvas = () => {
       setCanvas(canvas);
       SetBackgroundMask(canvas);
       AddBasicCard(canvas);
-
       OnSelectionEvents(canvas, fabricContext);
+      ReRenderElements(true);
     };
 
     handleResize();

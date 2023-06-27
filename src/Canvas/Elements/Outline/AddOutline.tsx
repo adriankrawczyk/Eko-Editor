@@ -33,7 +33,7 @@ const AddOutline = ({ description, parent }: AddOutlineParams) => {
   });
 
   const text = new fabric.Text(description, {
-    left: bodyOutlineLeft + (10 - description.length) * 2,
+    left: bodyOutlineLeft + (8 - description.length) * 2,
     top: bodyOutlineTop + 10,
     width: textBackground.width,
     height: textBackground.height,
