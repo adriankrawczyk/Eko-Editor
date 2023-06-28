@@ -2,12 +2,13 @@
 import { fabric } from 'fabric';
 import { useEffect, useRef, useContext } from 'react';
 import SetBackgroundMask from './SetBackgroundMask';
-import { AddBasicCard } from './Elements/MainCard/AddBasicCard';
+import { AddBasicCard, mainCard } from './Elements/MainCard/AddBasicCard';
 import SetObjectPrototype from './SetObjectPrototype';
 import OnSelectionEvents from './Elements/Logic/OnSelectionEvents';
 import { setCanvas } from './CanvasInstance';
 import { FabricContext } from '../App';
 import ReRenderElements from '../Rightbar/ReRenderElements';
+import AddContentBox from './Elements/ContentBox/AddContentBox';
 
 let canvas: fabric.Canvas;
 
@@ -32,6 +33,7 @@ const Canvas = () => {
       setCanvas(canvas);
       SetBackgroundMask(canvas);
       AddBasicCard(canvas);
+      canvas.add(AddContentBox(canvas.getWidth() / 2 - 50, canvas.getHeight() / 2, width - 200, height - 200));
       OnSelectionEvents(canvas, fabricContext);
       ReRenderElements(true);
     };

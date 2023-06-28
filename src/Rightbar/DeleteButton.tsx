@@ -23,7 +23,6 @@ const DeleteButton: React.FC = () => {
             const elementOnCanvas = canvas.getObjects().find((obj) => obj === element);
             return !!elementOnCanvas;
           });
-
           ReRenderElements(false);
         }
       }}>

@@ -4,10 +4,7 @@ import GroupWithOutlineEvents from '../Logic/GroupWithOutlineEvents';
 import CustomObjectOptions from '../Logic/CustomObjectOptions';
 import { canvas } from '../../CanvasInstance';
 
-const AddContentBox = (left: number, top: number) => {
-  const containerWidth = 800;
-  const containerHeight = 200;
-
+const AddContentBox = (left: number, top: number, containerWidth: number, containerHeight: number, parent?: fabric.Object) => {
   const container = new fabric.Rect({
     width: containerWidth,
     height: containerHeight,
@@ -21,6 +18,7 @@ const AddContentBox = (left: number, top: number) => {
   const contentBoxGroup = new fabric.Group([container, outline], {
     shape: 'content',
     outline,
+    parent,
   } as CustomObjectOptions);
 
   const contentBoxGroupWithEvents = GroupWithOutlineEvents({ canvas, parent: contentBoxGroup, outline });

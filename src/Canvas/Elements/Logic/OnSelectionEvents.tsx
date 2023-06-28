@@ -3,6 +3,7 @@ import CustomObject from './CustomObject';
 import { FabricContextProps } from '../../../App';
 import TextRightbar from '../../../Rightbar/TextRightbar';
 import CardRightbar from '../../../Rightbar/CardRightbar';
+import ContentRightbar from '../../../Rightbar/ContentRightbar';
 
 const handleSelection = (selectedObject: CustomObject, fabricContext: FabricContextProps) => {
   if (!selectedObject) return;
@@ -30,7 +31,14 @@ const handleSelection = (selectedObject: CustomObject, fabricContext: FabricCont
       setRightbarContent(CardRightbar(cardProps));
       break;
     }
-
+    case 'content': {
+      const contentProps = {
+        width: selectedObject['_objects'][0].width || 200,
+        height: selectedObject['_objects'][0].height || 100,
+      };
+      setRightbarContent(ContentRightbar(contentProps));
+      break;
+    }
     default:
       break;
   }

@@ -4,6 +4,7 @@ interface CustomObject extends fabric.Object {
   outline?: fabric.Object;
   text?: fabric.Object;
   card?: fabric.Object;
+  parent?: fabric.Object;
   _objects: fabric.Object[];
 }
 export default CustomObject;

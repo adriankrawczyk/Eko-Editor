@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { FabricContext } from '../App';
 import AddingDropdown from './AddingDropdown';
 import DeleteButton from './DeleteButton';
@@ -20,10 +20,10 @@ const Rightbar: React.FC = () => {
       <div className={`flex items-center justify-between p-4 border-b border-gray-200`}>
         <h2 className='text-lg font-semibold'>Settings</h2>
         <div className='flex gap-3'>
-          <AddingDropdown />
-          {!hideButtons() && <ArrowButton isUp={true} />}
+          {/*<AddingDropdown />
+             {!hideButtons() && <ArrowButton isUp={true} />}
           {!hideButtons() && <ArrowButton isUp={false} />}
-          {!hideButtons() && <DeleteButton />}
+          {!hideButtons() && <DeleteButton />}*/}
         </div>
       </div>
       <div className={`p-4`}>{fabricContext.rightbarContent}</div>

@@ -27,7 +27,7 @@ const AddingDropdown: React.FC = () => {
         newElement = AddButtonBox(canvas.getWidth() / 2, lastElement.top + BUTTON_BOX_HEIGHT * 1.5);
         break;
       case 'content':
-        newElement = AddContentBox(canvas.getWidth() / 2, lastElement.top + CONTENT_BOX_HEIGHT * 1.5);
+        newElement = AddContentBox(canvas.getWidth() / 2, lastElement.top + CONTENT_BOX_HEIGHT * 1.5, 800, 200);
         break;
       default:
         break;

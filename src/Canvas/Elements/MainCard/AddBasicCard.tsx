@@ -5,6 +5,7 @@ import AddTextBox from '../TextBox/AddTextBox';
 import CustomObjectOptions from '../Logic/CustomObjectOptions';
 import CustomObject from '../Logic/CustomObject';
 import MainObject from './MainObject';
+import AddContentBox from '../ContentBox/AddContentBox';
 let mainCard: CustomObject;
 const setMainCard = (newMainCard: CustomObject) => {
   mainCard = newMainCard;
@@ -20,16 +21,16 @@ const AddBasicCard = (canvas: fabric.Canvas) => {
     fill: 'white',
     left: (canvasWidth - cardWidth) / 2,
     top: (canvasHeight - cardHeight) / 2,
+    opacity: 0,
   });
-  const textBox = AddTextBox(canvasWidth / 2, canvasHeight / 2);
   const outline = AddOutline({ parent: card, description: 'Body' });
   const cardGroup = new fabric.Group([card, outline], { shape: 'card', outline, card } as CustomObjectOptions);
   const cardGroupWithEvents = GroupWithOutlineEvents({ canvas, parent: cardGroup, outline }) as fabric.Group;
 
   mainCard = cardGroupWithEvents as unknown as MainObject;
-  mainCard['elements'] = [textBox];
+  mainCard['elements'] = [];
 
-  canvas.add(cardGroupWithEvents, textBox);
+  canvas.add(cardGroupWithEvents);
 };
 
 export { AddBasicCard, mainCard, setMainCard };

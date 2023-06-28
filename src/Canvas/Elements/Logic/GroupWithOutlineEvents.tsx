@@ -1,3 +1,5 @@
+import { mainCard } from '../MainCard/AddBasicCard';
+
 interface GroupWithOutlineEventsParams {
   canvas: fabric.Canvas;
   parent: fabric.Object;

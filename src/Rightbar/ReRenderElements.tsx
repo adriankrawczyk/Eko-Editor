@@ -1,4 +1,3 @@
-import AddTextBox from '../Canvas/Elements/TextBox/AddTextBox';
 import { canvas } from '../Canvas/CanvasInstance';
 import { mainCard, setMainCard } from '../Canvas/Elements/MainCard/AddBasicCard';
 import AddOutline from '../Canvas/Elements/Outline/AddOutline';
