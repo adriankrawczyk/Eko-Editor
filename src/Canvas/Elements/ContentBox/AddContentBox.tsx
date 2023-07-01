@@ -5,25 +5,35 @@ import CustomObjectOptions from '../Logic/CustomObjectOptions';
 import { canvas } from '../../CanvasInstance';
 
 const AddContentBox = (left: number, top: number, containerWidth: number, containerHeight: number, parent?: fabric.Object) => {
-  const container = new fabric.Rect({
+  const rect = new fabric.Rect({
     width: containerWidth,
     height: containerHeight,
-    fill: 'white',
-    left: left - containerWidth / 2,
-    top: top - containerHeight / 2,
+    fill: `white`,
+    strokeWidth: 1,
+    stroke: 'blue',
+    left: left,
+    top: top,
   });
 
-  const outline = AddOutline({ parent: container, description: 'Content' });
+  const text = new fabric.Text('Content', {
+    left,
+    top,
+    fill: 'blue ',
+    fontFamily: 'Arial',
+    fontSize: 30,
+  });
 
-  const contentBoxGroup = new fabric.Group([container, outline], {
-    shape: 'content',
-    outline,
-    parent,
-  } as CustomObjectOptions);
+  // const outline = AddOutline({ parent: container, description: 'Content' });
 
-  const contentBoxGroupWithEvents = GroupWithOutlineEvents({ canvas, parent: contentBoxGroup, outline });
+  // const contentBoxGroup = new fabric.Group([container, outline, text], {
+  //   shape: 'content',
+  //   outline,
+  //   parent,
+  // } as CustomObjectOptions);
 
-  return contentBoxGroupWithEvents;
+  // const contentBoxGroupWithEvents = GroupWithOutlineEvents({ canvas, parent: contentBoxGroup, outline });
+
+  return new fabric.Group([rect, text], { shape: 'content', date: Date.now(), text } as unknown as CustomObjectOptions);
 };
 
 export default AddContentBox;

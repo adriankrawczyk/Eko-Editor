@@ -6,5 +6,6 @@ interface CustomObject extends fabric.Object {
   card?: fabric.Object;
   parent?: fabric.Object;
   _objects: fabric.Object[];
+  date?: Date;
 }
 export default CustomObject;

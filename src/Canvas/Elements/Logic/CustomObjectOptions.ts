@@ -4,5 +4,6 @@ interface CustomObjectOptions extends fabric.IGroupOptions {
   card?: fabric.Object;
   parent?: fabric.Object;
   outline: fabric.Object;
+  date?: Date;
 }
 export default CustomObjectOptions;
