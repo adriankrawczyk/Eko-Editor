@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import AddContentBox from '../Elements/AddContentBox';
 import { Context } from '../App';
 import { useContext } from 'react';
-import { setMouseIcon } from '../Canvas/MouseIcon';
 import AddText from '../Elements/AddText';
 import AddPhoto from '../Elements/AddPhoto';
 

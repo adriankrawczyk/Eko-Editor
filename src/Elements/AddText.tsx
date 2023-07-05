@@ -27,6 +27,7 @@ const AddText = (context: ContextProps) => {
         placeholder: 'Enter text',
         onChange: (event) => {
           (mouseIcon as fabric.Text)?.set({ text: event.target.value });
+          canvas.requestRenderAll();
         },
       })}
       {renderNumericInput({

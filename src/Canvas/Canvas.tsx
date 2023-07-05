@@ -28,13 +28,15 @@ const Canvas = () => {
       SetObjectPrototype();
       SetCanvas(canvas);
       SetBackgroundMask();
-      SetCanvasEvents(context);
+      SetCanvasEvents();
     };
 
     handleResize();
 
     window.addEventListener('resize', handleResize);
-
+    fabric.util.addListener(document.getElementsByClassName('upper-canvas')[0] as HTMLElement, 'contextmenu', (e: { preventDefault: () => void }) => {
+      e.preventDefault();
+    });
     return () => {
       window.removeEventListener('resize', handleResize);
     };
