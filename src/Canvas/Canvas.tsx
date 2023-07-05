@@ -1,20 +1,16 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { fabric } from 'fabric';
 import { useEffect, useRef, useContext } from 'react';
 import SetBackgroundMask from './SetBackgroundMask';
-import { AddBasicCard, mainCard } from './Elements/MainCard/AddBasicCard';
 import SetObjectPrototype from './SetObjectPrototype';
-import OnSelectionEvents from './Elements/Logic/OnSelectionEvents';
-import { setCanvas } from './CanvasInstance';
-import { FabricContext } from '../App';
-import ReRenderElements from '../Rightbar/ReRenderElements';
-import AddContentBox from './Elements/ContentBox/AddContentBox';
+import { SetCanvas } from './CanvasInstance';
+import { Context } from '../App';
+import SetCanvasEvents from './SetCanvasEvents';
 
 let canvas: fabric.Canvas;
 
 const Canvas = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const fabricContext = useContext(FabricContext);
+  const context = useContext(Context);
 
   useEffect(() => {
     const handleResize = () => {
@@ -30,12 +26,9 @@ const Canvas = () => {
       });
 
       SetObjectPrototype();
-      setCanvas(canvas);
-      SetBackgroundMask(canvas);
-      AddBasicCard(canvas);
-      canvas.add(AddContentBox(canvas.getWidth() / 2 - 50, canvas.getHeight() / 2, width - 200, height - 200));
-      OnSelectionEvents(canvas, fabricContext);
-      ReRenderElements(true);
+      SetCanvas(canvas);
+      SetBackgroundMask();
+      SetCanvasEvents(context);
     };
 
     handleResize();

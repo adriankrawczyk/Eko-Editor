@@ -1,57 +1,37 @@
 import React, { useState } from 'react';
-import ReRenderElements from './ReRenderElements';
-import { mainCard } from '../Canvas/Elements/MainCard/AddBasicCard';
-import AddTextBox from '../Canvas/Elements/TextBox/AddTextBox';
-import { canvas } from '../Canvas/CanvasInstance';
-import AddButtonBox from '../Canvas/Elements/ButtonBox/AddButtonBox';
-import AddContentBox from '../Canvas/Elements/ContentBox/AddContentBox';
+import AddContentBox from '../Elements/AddContentBox';
+import { Context } from '../App';
+import { useContext } from 'react';
+import { setMouseIcon } from '../Canvas/MouseIcon';
+import AddText from '../Elements/AddText';
+import AddPhoto from '../Elements/AddPhoto';
 
 const AddingDropdown: React.FC = () => {
   const [menuVisible, setMenuVisible] = useState(false);
+  const context = useContext(Context);
 
   const handleAddButtonClick = () => {
     setMenuVisible(!menuVisible);
-  };
-  const addElement = (type: string) => {
-    const elements = mainCard['elements'];
-    const lastElement = elements[elements.length - 1];
-    let newElement;
-    const TEXT_BOX_HEIGHT = 200;
-    const BUTTON_BOX_HEIGHT = 200;
-    const CONTENT_BOX_HEIGHT = 200;
-    switch (type) {
-      case 'text':
-        newElement = AddTextBox(canvas.getWidth() / 2, lastElement.top + TEXT_BOX_HEIGHT * 1.5);
-        break;
-      case 'button':
-        newElement = AddButtonBox(canvas.getWidth() / 2, lastElement.top + BUTTON_BOX_HEIGHT * 1.5);
-        break;
-      case 'content':
-        newElement = AddContentBox(canvas.getWidth() / 2, lastElement.top + CONTENT_BOX_HEIGHT * 1.5, 800, 200);
-        break;
-      default:
-        break;
-    }
-
-    if (newElement) {
-      canvas.add(newElement);
-      elements.push(newElement);
-      ReRenderElements(true);
-    }
   };
 
   const options = [
     {
       text: 'Content',
-      onClick: () => addElement('content'),
+      onClick: () => {
+        AddContentBox(context);
+      },
     },
     {
       text: 'Text',
-      onClick: () => addElement('text'),
+      onClick: () => {
+        AddText(context);
+      },
     },
     {
-      text: 'Button',
-      onClick: () => addElement('button'),
+      text: 'Photo',
+      onClick: () => {
+        AddPhoto(context);
+      },
     },
   ];
   return (

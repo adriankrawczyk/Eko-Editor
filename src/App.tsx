@@ -1,29 +1,40 @@
 import React, { createContext, useState } from 'react';
 import Canvas from './Canvas/Canvas';
-import Rightbar from './Rightbar/Rightbar';
 import './index.css';
+import Rightbar from './Rightbar/Rightbar';
 
-export interface FabricContextProps {
-  rightbarContent: JSX.Element;
-  setRightbarContent: React.Dispatch<React.SetStateAction<JSX.Element>>;
+export interface ContextProps {
+  width: number;
+  setWidth: React.Dispatch<React.SetStateAction<number>>;
+  height: number;
+  setHeight: React.Dispatch<React.SetStateAction<number>>;
+  rightbarContent: React.ReactNode;
+  setRightbarContent: React.Dispatch<React.SetStateAction<React.ReactNode>>;
 }
 
-export const FabricContext = createContext<FabricContextProps>({} as FabricContextProps);
+export const Context = createContext<ContextProps>({} as ContextProps);
 
 const App: React.FC = () => {
-  const [rightbarContent, setRightbarContent] = useState<JSX.Element>(<></>);
+  const [width, setWidth] = useState<number>(100);
+  const [height, setHeight] = useState<number>(100);
 
-  const fabricContextValue: FabricContextProps = {
+  const [rightbarContent, setRightbarContent] = useState<React.ReactNode>(<></>);
+
+  const contextValue: ContextProps = {
+    width,
+    setWidth,
+    height,
+    setHeight,
     rightbarContent,
     setRightbarContent,
   };
 
   return (
     <div className='flex'>
-      <FabricContext.Provider value={fabricContextValue}>
+      <Context.Provider value={contextValue}>
         <Canvas />
         <Rightbar />
-      </FabricContext.Provider>
+      </Context.Provider>
     </div>
   );
 };
