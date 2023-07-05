@@ -6,14 +6,15 @@ import { renderInput, renderNumericInput } from '../Rightbar/RightbarUtils';
 import { mouseIcon } from '../Canvas/MouseIcon';
 
 const AddText = (context: ContextProps) => {
-  const text = new fabric.Text('Your text here', {
+  const text = new fabric.Text(context.textValue, {
     left: 0,
     top: 0,
     width: context.width,
     height: context.height,
     fill: 'blue',
-    fontSize: 32,
+    fontSize: context.fontSize,
     fontFamily: 'arial',
+    angle: context.angle,
   });
 
   canvas.add(text);
@@ -23,10 +24,11 @@ const AddText = (context: ContextProps) => {
       {renderInput({
         id: 'textValueInput',
         label: 'Text',
-        defaultValue: 'Your text here',
+        defaultValue: context.textValue,
         placeholder: 'Enter text',
         onChange: (event) => {
           (mouseIcon as fabric.Text)?.set({ text: event.target.value });
+          context.setTextValue(event.target.value);
           canvas.requestRenderAll();
         },
       })}
@@ -37,6 +39,7 @@ const AddText = (context: ContextProps) => {
         placeholder: 'Enter font size',
         onChange: (event) => {
           (mouseIcon as fabric.Text)?.set({ fontSize: parseInt(event.target.value) });
+          context.setFontSize(parseInt(event.target.value));
         },
       })}
       {renderNumericInput({
@@ -46,6 +49,7 @@ const AddText = (context: ContextProps) => {
         placeholder: 'Enter angle',
         onChange: (event) => {
           mouseIcon?.set({ angle: parseInt(event.target.value) });
+          context.setAngle(parseInt(event.target.value));
         },
       })}
     </>

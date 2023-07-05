@@ -7,7 +7,12 @@ interface DropdownProps {
   defaultValue: string;
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
-
+interface CheckboxProps {
+  id: string;
+  label: string;
+  checked: boolean;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
 interface InputProps {
   id: string;
   label: string;
@@ -34,8 +39,20 @@ interface ColorProps {
   label: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
+export const renderCheckbox = ({ id, label, checked, onChange }: CheckboxProps) => {
+  return (
+    <div className='mb-4'>
+      <div className='flex items-center'>
+        <input id={id} type='checkbox' className='form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out' checked={checked} onChange={onChange} />
+        <label htmlFor={id} className='ml-2 block text-sm font-medium text-gray-700'>
+          {label}
+        </label>
+      </div>
+    </div>
+  );
+};
 
-export const renderDropdown = ({ id, label, options, defaultValue, onChange }: DropdownProps) => {
+export const renderDropdown = ({ id, label, options, onChange }: DropdownProps) => {
   return (
     <div className='mb-4'>
       <label htmlFor={id} className='block text-sm font-medium text-gray-700 mb-1'>

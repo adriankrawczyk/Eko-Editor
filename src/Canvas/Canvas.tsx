@@ -1,16 +1,14 @@
 import { fabric } from 'fabric';
-import { useEffect, useRef, useContext } from 'react';
+import { useEffect, useRef } from 'react';
 import SetBackgroundMask from './SetBackgroundMask';
 import SetObjectPrototype from './SetObjectPrototype';
 import { SetCanvas } from './CanvasInstance';
-import { Context } from '../App';
 import SetCanvasEvents from './SetCanvasEvents';
 
 let canvas: fabric.Canvas;
 
 const Canvas = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const context = useContext(Context);
 
   useEffect(() => {
     const handleResize = () => {

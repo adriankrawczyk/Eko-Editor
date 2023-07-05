@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import AddingDropdown from './AddingDropdown';
-import { renderNumericInput } from './RightbarUtils';
 import { Context } from '../App';
 import SetBackgroundMask from '../Canvas/SetBackgroundMask';
 

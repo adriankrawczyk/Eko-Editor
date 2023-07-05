@@ -1,4 +1,3 @@
-import { ContextProps } from '../App';
 import { canvas } from './CanvasInstance';
 import { setMouseIcon, mouseIcon } from './MouseIcon';
 import { fabric } from 'fabric';
@@ -19,8 +18,8 @@ const SetCanvasEvents = () => {
     canvas.requestRenderAll();
   });
 
-  canvas.on('selection:created', (e) => {
-    canvas.discardActiveObject(); 
+  canvas.on('selection:created', () => {
+    canvas.discardActiveObject();
   });
 
   canvas.on('mouse:down', (e) => {
@@ -28,7 +27,8 @@ const SetCanvasEvents = () => {
       mouseIcon.setCoords();
       setMouseIcon(null);
     } else {
-      setMouseIcon(e.target as fabric.Object);
+      const target = e.target as fabric.Object;
+      setMouseIcon(target);
     }
   });
 

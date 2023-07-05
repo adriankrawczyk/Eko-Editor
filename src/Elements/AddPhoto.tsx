@@ -3,7 +3,7 @@ import { fabric } from 'fabric';
 import { canvas } from '../Canvas/CanvasInstance';
 import { setMouseIcon } from '../Canvas/MouseIcon';
 import { ContextProps } from '../App';
-import { renderInput, renderPhoto } from '../Rightbar/RightbarUtils';
+import { renderPhoto } from '../Rightbar/RightbarUtils';
 import { renderNumericInput } from '../Rightbar/RightbarUtils';
 import { mouseIcon } from '../Canvas/MouseIcon';
 

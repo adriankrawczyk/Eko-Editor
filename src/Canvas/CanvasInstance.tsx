@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { fabric } from 'fabric';
 
 export let canvas: fabric.Canvas;
