@@ -27,7 +27,7 @@ const Canvas = () => {
 
       SetObjectPrototype();
       SetCanvas(canvas);
-      SetBackgroundMask();
+      SetBackgroundMask('#FFF');
       SetCanvasEvents();
     };
 
