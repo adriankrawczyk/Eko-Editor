@@ -80,6 +80,13 @@ export const renderInput = ({ id, label, defaultValue, placeholder, onChange }: 
   );
 };
 export const renderNumericInput = ({ id, label, defaultValue, placeholder, onChange, min, max }: NumericInputProps) => {
+  const handleInputCreation = () => {
+    const inputElement = document.getElementById(id) as HTMLInputElement;
+    inputElement.value = defaultValue;
+  };
+
+  setTimeout(handleInputCreation, 0);
+
   return (
     <div className='mb-4'>
       <label htmlFor={id} className='block text-sm font-medium text-gray-700 mb-1'>
