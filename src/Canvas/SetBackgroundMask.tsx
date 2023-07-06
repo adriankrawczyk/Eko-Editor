@@ -2,7 +2,7 @@ import { fabric } from 'fabric';
 import { canvas } from './CanvasInstance';
 
 const SetBackgroundMask = (color: string) => {
-  const src = '/public/tile.webp';
+  const src = '/tile.webp';
 
   fabric.Image.fromURL(src, (image: fabric.Image) => {
     const filter = new fabric.Image.filters.BlendColor({

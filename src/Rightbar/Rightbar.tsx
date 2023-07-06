@@ -4,6 +4,7 @@ import { Context } from '../App';
 import SetBackgroundMask from '../Canvas/SetBackgroundMask';
 
 const Rightbar: React.FC = () => {
+  const context = useContext(Context);
   return (
     <div className='fixed top-0 right-0 h-full w-80 bg-white border-l border-gray-300'>
       <div className={`flex items-center justify-between p-4 border-b border-gray-200`}>
@@ -26,7 +27,7 @@ const Rightbar: React.FC = () => {
             className='mb-4 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
           />
         </div>
-        {useContext(Context).rightbarContent}
+        {context.rightbarContent}
       </div>
     </div>
   );

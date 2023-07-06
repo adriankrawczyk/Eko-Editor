@@ -19,8 +19,31 @@ const AddText = (context: ContextProps) => {
 
   canvas.add(text);
   setMouseIcon(text);
+
   context.setRightbarContent(
     <>
+      {renderNumericInput({
+        id: 'fontSizeInput',
+        label: 'Font Size',
+        defaultValue: context.fontSize.toString(),
+        placeholder: 'Enter font size',
+        onChange: (event) => {
+          (mouseIcon as fabric.Text)?.set({ fontSize: parseInt(event.target.value) });
+          context.setFontSize(parseInt(event.target.value));
+          canvas.requestRenderAll();
+        },
+      })}
+      {renderNumericInput({
+        id: 'angleInput',
+        label: 'Angle',
+        defaultValue: context.angle.toString(),
+        placeholder: 'Enter angle',
+        onChange: (event) => {
+          mouseIcon?.set({ angle: parseInt(event.target.value) });
+          context.setAngle(parseInt(event.target.value));
+          canvas.requestRenderAll();
+        },
+      })}
       {renderInput({
         id: 'textValueInput',
         label: 'Text',
@@ -30,26 +53,6 @@ const AddText = (context: ContextProps) => {
           (mouseIcon as fabric.Text)?.set({ text: event.target.value });
           context.setTextValue(event.target.value);
           canvas.requestRenderAll();
-        },
-      })}
-      {renderNumericInput({
-        id: 'fontSizeInput',
-        label: 'Font Size',
-        defaultValue: '32',
-        placeholder: 'Enter font size',
-        onChange: (event) => {
-          (mouseIcon as fabric.Text)?.set({ fontSize: parseInt(event.target.value) });
-          context.setFontSize(parseInt(event.target.value));
-        },
-      })}
-      {renderNumericInput({
-        id: 'angleInput',
-        label: 'Angle',
-        defaultValue: '0',
-        placeholder: 'Enter angle',
-        onChange: (event) => {
-          mouseIcon?.set({ angle: parseInt(event.target.value) });
-          context.setAngle(parseInt(event.target.value));
         },
       })}
     </>

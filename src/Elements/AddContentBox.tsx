@@ -26,6 +26,7 @@ const AddContentBox = (context: ContextProps) => {
         onChange: (event) => {
           context.setWidth(parseInt(event.target.value));
           mouseIcon?.set({ width: parseInt(event.target.value) });
+          canvas.requestRenderAll();
         },
       })}
       {renderNumericInput({
@@ -36,6 +37,7 @@ const AddContentBox = (context: ContextProps) => {
         onChange: (event) => {
           context.setHeight(parseInt(event.target.value));
           mouseIcon?.set({ height: parseInt(event.target.value) });
+          canvas.requestRenderAll();
         },
       })}
     </>
