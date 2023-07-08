@@ -15,11 +15,13 @@ const AddText = (context: ContextProps) => {
     fontSize: context.fontSize,
     fontFamily: 'arial',
     angle: context.angle,
+    opacity: 0,
   });
 
   canvas.add(text);
-  setMouseIcon(text);
-
+  setMouseIcon(text, context);
+};
+const setTextRightbar = (context: ContextProps) => {
   context.setRightbarContent(
     <>
       {renderNumericInput({
@@ -65,5 +67,5 @@ const AddText = (context: ContextProps) => {
     </>
   );
 };
-
-export default AddText;
+// eslint-disable-next-line react-refresh/only-export-components
+export { AddText, setTextRightbar };

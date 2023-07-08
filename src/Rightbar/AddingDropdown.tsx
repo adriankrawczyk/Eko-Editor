@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import AddContentBox from '../Elements/AddContentBox';
+import { AddContentBox } from '../Elements/AddContentBox';
 import { Context } from '../App';
 import { useContext } from 'react';
-import AddText from '../Elements/AddText';
-import AddPhoto from '../Elements/AddPhoto';
-
+import { AddText } from '../Elements/AddText';
+import { AddPhoto } from '../Elements/AddPhoto';
 const AddingDropdown: React.FC = () => {
   const [menuVisible, setMenuVisible] = useState(false);
   const context = useContext(Context);

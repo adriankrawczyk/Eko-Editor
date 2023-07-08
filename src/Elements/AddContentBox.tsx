@@ -13,9 +13,13 @@ const AddContentBox = (context: ContextProps) => {
     stroke: 'blue',
     left: 0,
     top: 0,
+    opacity: 0,
   });
 
   canvas.add(rect);
+  setMouseIcon(rect, context);
+};
+const setContextBoxRightbar = (context: ContextProps) => {
   context.setRightbarContent(
     <>
       {renderNumericInput({
@@ -49,7 +53,6 @@ const AddContentBox = (context: ContextProps) => {
       })}
     </>
   );
-  setMouseIcon(rect);
 };
-
-export default AddContentBox;
+// eslint-disable-next-line react-refresh/only-export-components
+export { AddContentBox, setContextBoxRightbar };

@@ -4,12 +4,14 @@ import SetBackgroundMask from './SetBackgroundMask';
 import SetObjectPrototype from './SetObjectPrototype';
 import { SetCanvas } from './CanvasInstance';
 import SetCanvasEvents from './SetCanvasEvents';
+import { useContext } from 'react';
+import { Context } from '../App';
 
 let canvas: fabric.Canvas;
 
 const Canvas = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-
+  const context = useContext(Context);
   useEffect(() => {
     const handleResize = () => {
       if (!canvasRef.current) return;
@@ -26,7 +28,7 @@ const Canvas = () => {
       SetObjectPrototype();
       SetCanvas(canvas);
       SetBackgroundMask('#FFF');
-      SetCanvasEvents();
+      SetCanvasEvents(context);
     };
 
     handleResize();
