@@ -33,6 +33,11 @@ interface SliderProps {
   step: number;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
+interface ButtonProps {
+  id: string;
+  label: string;
+  onClick: () => void;
+}
 
 interface ColorProps {
   id: string;
@@ -125,6 +130,15 @@ export const renderColor = ({ id, label, onChange }: ColorProps) => {
         {label}
       </label>
       <input id={id} className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500' type='color' onChange={onChange} />
+    </div>
+  );
+};
+export const renderButton = ({ id, label, onClick }: ButtonProps): JSX.Element => {
+  return (
+    <div className='mb-4'>
+      <button id={id} className='px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' onClick={onClick}>
+        {label}
+      </button>
     </div>
   );
 };

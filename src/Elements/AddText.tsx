@@ -2,7 +2,7 @@ import { fabric } from 'fabric';
 import { canvas } from '../Canvas/CanvasInstance';
 import { setMouseIcon } from '../Canvas/MouseIcon';
 import { ContextProps } from '../App';
-import { renderInput, renderNumericInput } from '../Rightbar/RightbarUtils';
+import { renderButton, renderInput, renderNumericInput } from '../Rightbar/RightbarUtils';
 import { mouseIcon } from '../Canvas/MouseIcon';
 
 const AddText = (context: ContextProps) => {
@@ -53,6 +53,13 @@ const AddText = (context: ContextProps) => {
           (mouseIcon as fabric.Text)?.set({ text: event.target.value });
           context.setTextValue(event.target.value);
           canvas.requestRenderAll();
+        },
+      })}
+      {renderButton({
+        id: 'myButton',
+        label: 'Apply',
+        onClick: () => {
+          context.setRightbarContent(<></>);
         },
       })}
     </>

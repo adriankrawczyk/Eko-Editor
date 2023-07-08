@@ -16,6 +16,8 @@ export interface ContextProps {
   setFontSize: React.Dispatch<React.SetStateAction<number>>;
   angle: number;
   setAngle: React.Dispatch<React.SetStateAction<number>>;
+  size: number;
+  setSize: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export const Context = createContext<ContextProps>({} as ContextProps);
@@ -26,7 +28,7 @@ const App: React.FC = () => {
   const [textValue, setTextValue] = useState<string>('Text');
   const [fontSize, setFontSize] = useState<number>(32);
   const [angle, setAngle] = useState<number>(0);
-
+  const [size, setSize] = useState<number>(100);
   const [rightbarContent, setRightbarContent] = useState<React.ReactNode>(<></>);
 
   const contextValue: ContextProps = {
@@ -42,6 +44,8 @@ const App: React.FC = () => {
     setFontSize,
     angle,
     setAngle,
+    size,
+    setSize,
   };
 
   return (

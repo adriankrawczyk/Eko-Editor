@@ -1,6 +1,6 @@
 import { fabric } from 'fabric';
 import { canvas } from '../Canvas/CanvasInstance';
-import { renderNumericInput } from '../Rightbar/RightbarUtils';
+import { renderButton, renderNumericInput } from '../Rightbar/RightbarUtils';
 import { ContextProps } from '../App';
 import { mouseIcon, setMouseIcon } from '../Canvas/MouseIcon';
 
@@ -38,6 +38,13 @@ const AddContentBox = (context: ContextProps) => {
           context.setHeight(parseInt(event.target.value));
           mouseIcon?.set({ height: parseInt(event.target.value) });
           canvas.requestRenderAll();
+        },
+      })}
+      {renderButton({
+        id: 'myButton',
+        label: 'Apply',
+        onClick: () => {
+          context.setRightbarContent(<></>);
         },
       })}
     </>

@@ -3,7 +3,7 @@ import { fabric } from 'fabric';
 import { canvas } from '../Canvas/CanvasInstance';
 import { setMouseIcon } from '../Canvas/MouseIcon';
 import { ContextProps } from '../App';
-import { renderPhoto } from '../Rightbar/RightbarUtils';
+import { renderButton, renderPhoto } from '../Rightbar/RightbarUtils';
 import { renderNumericInput } from '../Rightbar/RightbarUtils';
 import { mouseIcon } from '../Canvas/MouseIcon';
 
@@ -32,6 +32,7 @@ const AddPhoto = (context: ContextProps) => {
 
   const handleSizeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newSize = parseInt(event.target.value);
+    context.setSize(newSize);
     const image = mouseIcon as fabric.Image;
     if (image) {
       const scaleRatio = newSize / (image.width as number);
@@ -52,9 +53,16 @@ const AddPhoto = (context: ContextProps) => {
       {renderNumericInput({
         id: 'sizeInput',
         label: 'Size',
-        defaultValue: context.width.toString(),
+        defaultValue: context.size.toString(),
         placeholder: 'Enter size',
         onChange: handleSizeChange,
+      })}
+      {renderButton({
+        id: 'myButton',
+        label: 'Apply',
+        onClick: () => {
+          context.setRightbarContent(<></>);
+        },
       })}
     </>
   );
