@@ -7,7 +7,7 @@ const StickText = (mouseIcon: fabric.Object, pointer: { x: number; y: number }) 
     canvas.requestRenderAll();
     return;
   }
-  const stickDistance = 50;
+  const stickDistance = 20;
   const objectLeft = closestObject.left as number;
   const objectTop = closestObject.top as number;
   const objectWidth = closestObject.width as number;

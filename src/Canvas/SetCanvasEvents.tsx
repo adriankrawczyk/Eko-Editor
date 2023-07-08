@@ -7,6 +7,7 @@ import StickText from './StickText';
 const SetCanvasEvents = () => {
   canvas.on('mouse:move', (event) => {
     if (!mouseIcon) return;
+    mouseIcon.set({ opacity: 1 });
 
     const pointer = canvas.getPointer(event.e);
     mouseIcon.set({
