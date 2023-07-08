@@ -31,7 +31,7 @@ const setTextRightbar = (context: ContextProps) => {
         placeholder: 'Enter font size',
         onChange: (event) => {
           (mouseIcon as fabric.Text)?.set({ fontSize: parseInt(event.target.value) });
-          context.setFontSize(parseInt(event.target.value));
+          context.fontSize = parseInt(event.target.value);
           canvas.requestRenderAll();
         },
       })}
@@ -42,7 +42,7 @@ const setTextRightbar = (context: ContextProps) => {
         placeholder: 'Enter angle',
         onChange: (event) => {
           mouseIcon?.set({ angle: parseInt(event.target.value) });
-          context.setAngle(parseInt(event.target.value));
+          context.angle = parseInt(event.target.value);
           canvas.requestRenderAll();
         },
       })}
@@ -53,7 +53,7 @@ const setTextRightbar = (context: ContextProps) => {
         placeholder: 'Enter text',
         onChange: (event) => {
           (mouseIcon as fabric.Text)?.set({ text: event.target.value });
-          context.setTextValue(event.target.value);
+          context.textValue = event.target.value;
           canvas.requestRenderAll();
         },
       })}

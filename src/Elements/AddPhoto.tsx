@@ -32,7 +32,7 @@ const handlePhotoChange = (event: React.ChangeEvent<HTMLInputElement>, context: 
 
 const handleSizeChange = (event: React.ChangeEvent<HTMLInputElement>, context: ContextProps) => {
   const newSize = parseInt(event.target.value);
-  context.setSize(newSize);
+  context.size = newSize;
   const image = mouseIcon as fabric.Image;
   if (image) {
     const scaleRatio = newSize / (image.width as number);

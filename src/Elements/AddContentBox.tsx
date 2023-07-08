@@ -28,7 +28,7 @@ const setContextBoxRightbar = (context: ContextProps) => {
         defaultValue: context.width.toString(),
         placeholder: 'Enter width',
         onChange: (event) => {
-          context.setWidth(parseInt(event.target.value));
+          context.width = parseInt(event.target.value);
           mouseIcon?.set({ width: parseInt(event.target.value) });
           canvas.requestRenderAll();
         },
@@ -39,7 +39,8 @@ const setContextBoxRightbar = (context: ContextProps) => {
         defaultValue: context.height.toString(),
         placeholder: 'Enter height',
         onChange: (event) => {
-          context.setHeight(parseInt(event.target.value));
+          console.log(context.height);
+          context.height = parseInt(event.target.value);
           mouseIcon?.set({ height: parseInt(event.target.value) });
           canvas.requestRenderAll();
         },

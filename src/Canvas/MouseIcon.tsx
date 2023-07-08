@@ -11,14 +11,21 @@ export const setMouseIcon = (obj: fabric.Object | null, context: ContextProps) =
   if (mouseIcon) {
     switch (mouseIcon.type) {
       case 'image': {
+        context.size = mouseIcon.width as number;
         setPhotoRightbar(context);
         break;
       }
       case 'rect': {
+        context.width = mouseIcon.width as number;
+        context.height = mouseIcon.height as number;
         setContextBoxRightbar(context);
         break;
       }
       case 'text': {
+        context.fontSize = (mouseIcon as fabric.Text).fontSize as number;
+        context.textValue = (mouseIcon as fabric.Text).text as string;
+        context.angle = mouseIcon.angle as number;
+
         setTextRightbar(context);
         break;
       }
