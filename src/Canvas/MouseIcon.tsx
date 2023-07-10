@@ -34,7 +34,7 @@ export const setMouseIcon = (obj: fabric.Object | null, context: ContextProps) =
         break;
       }
     }
-    mouseIcon.setCoords();
     canvas.bringToFront(mouseIcon);
+    mouseIcon.setCoords();
   } else context.setRightbarContent(<></>);
 };
