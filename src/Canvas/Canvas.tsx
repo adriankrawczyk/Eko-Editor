@@ -32,7 +32,11 @@ const Canvas = () => {
     };
 
     handleResize();
-
+    const isFirstTimeOpening = !localStorage.getItem('appOpenedBefore');
+    if (isFirstTimeOpening) {
+      localStorage.setItem('appOpenedBefore', 'true');
+      window.location.reload();
+    }
     window.addEventListener('resize', handleResize);
     fabric.util.addListener(document.getElementsByClassName('upper-canvas')[0] as HTMLElement, 'contextmenu', (e: { preventDefault: () => void }) => {
       e.preventDefault();
