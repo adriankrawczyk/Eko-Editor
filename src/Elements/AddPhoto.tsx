@@ -20,13 +20,7 @@ const handlePhotoChange = (event: React.ChangeEvent<HTMLInputElement>, context: 
           top: 0,
           opacity: 0,
         });
-        const clipPath = new fabric.Rect({
-          width: image.width,
-          height: image.height,
-          left: 0,
-          top: 0,
-        });
-        image.clipPath = clipPath;
+        image.set({ clipPath: getClipPath(image, context) });
         setMouseIcon(image, context, true);
         canvas.add(image);
       };
@@ -34,36 +28,37 @@ const handlePhotoChange = (event: React.ChangeEvent<HTMLInputElement>, context: 
     reader.readAsDataURL(file);
   }
 };
-
+const getClipPath = (image: fabric.Image, context: ContextProps) => {
+  let clipPath;
+  if (context.photoType === 'Circular') {
+    clipPath = new fabric.Circle({
+      radius: (image.width as number) / 2,
+      left: 0,
+      top: 0,
+    });
+  } else {
+    clipPath = new fabric.Rect({
+      width: image.width,
+      height: image.height,
+      left: 0,
+      top: 0,
+    });
+  }
+  return clipPath;
+};
 const setPhotoRightbar = (context: ContextProps) => {
   canvas.discardActiveObject();
 
   const handlePhotoTypeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     context.photoType = event.target.value;
-
     const activeObject = canvas.getActiveObject();
     if (activeObject && activeObject.type === 'image') {
       const image = activeObject as fabric.Image;
-      if (context.photoType === 'Circular') {
-        const clipPath = new fabric.Circle({
-          radius: (image.width as number) / 2,
-          left: 0,
-          top: 0,
-        });
-        image.clipPath = clipPath;
-      } else {
-        const clipPath = new fabric.Rect({
-          width: image.width,
-          height: image.height,
-          left: 0,
-          top: 0,
-        });
-        image.clipPath = clipPath;
-      }
+
       // TO CHANGE
       image.set({ width: (image.width as number) + 1 });
       image.set({ width: (image.width as number) - 1 });
-
+      image.set({ clipPath: getClipPath(image, context) });
       setMouseIcon(image, context, false);
       canvas.setActiveObject(image);
       canvas.requestRenderAll();
@@ -83,11 +78,12 @@ const setPhotoRightbar = (context: ContextProps) => {
         id: 'scaleXInput',
         label: 'Scale X',
         defaultValue: context.scaleX.toString(),
-        placeholder: 'Enter scale X',
+        placeholder: 'Enter size X',
         onChange: (e) => {
           const activeObject = canvas.getActiveObject();
           if (!activeObject) return;
-          activeObject.set({ scaleX: parseInt(e.target.value) });
+          activeObject.set({ scaleX: parseInt(e.target.value) / 100 });
+
           setMouseIcon(activeObject, context, false);
         },
       })}
@@ -95,11 +91,11 @@ const setPhotoRightbar = (context: ContextProps) => {
         id: 'scaleYInput',
         label: 'Scale Y',
         defaultValue: context.scaleY.toString(),
-        placeholder: 'Enter scale Y',
+        placeholder: 'Enter size Y',
         onChange: (e) => {
           const activeObject = canvas.getActiveObject();
           if (!activeObject) return;
-          activeObject.set({ scaleY: parseInt(e.target.value) });
+          activeObject.set({ scaleY: parseInt(e.target.value) / 100 });
           setMouseIcon(activeObject, context, false);
         },
       })}
@@ -114,7 +110,10 @@ const setPhotoRightbar = (context: ContextProps) => {
         id: 'myButton',
         label: 'Apply',
         onClick: () => {
+          canvas.discardActiveObject();
+          setMouseIcon(null, context, false);
           context.setRightbarContent(<></>);
+          canvas.requestRenderAll();
         },
       })}
     </>

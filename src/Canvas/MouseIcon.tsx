@@ -13,8 +13,8 @@ export const setMouseIcon = (obj: fabric.Object | null, context: ContextProps, m
     mouseIcon.set({ moving });
     switch (mouseIcon.type) {
       case 'image': {
-        context.scaleX = mouseIcon.scaleX as number;
-        context.scaleY = mouseIcon.scaleY as number;
+        context.scaleX = Math.round((mouseIcon.scaleX as number) * 100);
+        context.scaleY = Math.round((mouseIcon.scaleY as number) * 100);
         context.photoType = mouseIcon.clipPath && mouseIcon.clipPath.type === 'circle' ? 'Circular' : 'Rectangular';
         setPhotoRightbar(context);
         break;

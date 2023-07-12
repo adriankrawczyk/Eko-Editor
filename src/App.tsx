@@ -34,8 +34,8 @@ const App: React.FC = () => {
   const [textValue, setTextValue] = useState<string>('Text');
   const [fontSize, setFontSize] = useState<number>(32);
   const [angle, setAngle] = useState<number>(0);
-  const [scaleX, setScaleX] = useState<number>(1);
-  const [scaleY, setScaleY] = useState<number>(1);
+  const [scaleX, setScaleX] = useState<number>(100);
+  const [scaleY, setScaleY] = useState<number>(100);
   const [rightbarContent, setRightbarContent] = useState<React.ReactNode>(<></>);
   const [resolution, setResolution] = useState<string>('1x1');
   const [photoType, setPhotoType] = useState<string>('Rectangular');

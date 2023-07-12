@@ -18,14 +18,13 @@ const AddText = (context: ContextProps) => {
     angle: context.angle,
     opacity: 0,
   });
-
   canvas.add(text);
   setMouseIcon(text, context, true);
 };
 const setTextRightbar = (context: ContextProps) => {
   context.setRightbarContent(
     <>
-      {renderNumericInput({
+      {/* {renderNumericInput({
         id: 'fontSizeInput',
         label: 'Font Size',
         defaultValue: context.fontSize.toString(),
@@ -35,7 +34,7 @@ const setTextRightbar = (context: ContextProps) => {
           context.fontSize = parseInt(event.target.value);
           canvas.requestRenderAll();
         },
-      })}
+      })} */}
       {renderNumericInput({
         id: 'angleInput',
         label: 'Angle',
@@ -62,7 +61,10 @@ const setTextRightbar = (context: ContextProps) => {
         id: 'myButton',
         label: 'Apply',
         onClick: () => {
+          canvas.discardActiveObject();
+          setMouseIcon(null, context, false);
           context.setRightbarContent(<></>);
+          canvas.requestRenderAll();
         },
       })}
     </>

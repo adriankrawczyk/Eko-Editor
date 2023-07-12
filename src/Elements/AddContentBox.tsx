@@ -96,7 +96,10 @@ const setContextBoxRightbar = (context: ContextProps) => {
         id: 'myButton',
         label: 'Apply',
         onClick: () => {
+          canvas.discardActiveObject();
+          setMouseIcon(null, context, false);
           context.setRightbarContent(<></>);
+          canvas.requestRenderAll();
         },
       })}
     </>
