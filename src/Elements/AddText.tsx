@@ -6,6 +6,7 @@ import { renderButton, renderInput, renderNumericInput } from '../Rightbar/Right
 import { mouseIcon } from '../Canvas/MouseIcon';
 
 const AddText = (context: ContextProps) => {
+  canvas.discardActiveObject();
   const text = new fabric.Text(context.textValue, {
     left: 0,
     top: 0,
@@ -19,7 +20,7 @@ const AddText = (context: ContextProps) => {
   });
 
   canvas.add(text);
-  setMouseIcon(text, context);
+  setMouseIcon(text, context, true);
 };
 const setTextRightbar = (context: ContextProps) => {
   context.setRightbarContent(
@@ -30,7 +31,7 @@ const setTextRightbar = (context: ContextProps) => {
         defaultValue: context.fontSize.toString(),
         placeholder: 'Enter font size',
         onChange: (event) => {
-          (mouseIcon as fabric.Text)?.set({ fontSize: parseInt(event.target.value) });
+          (mouseIcon as unknown as fabric.Text)?.set({ fontSize: parseInt(event.target.value) });
           context.fontSize = parseInt(event.target.value);
           canvas.requestRenderAll();
         },
@@ -52,7 +53,7 @@ const setTextRightbar = (context: ContextProps) => {
         defaultValue: context.textValue,
         placeholder: 'Enter text',
         onChange: (event) => {
-          (mouseIcon as fabric.Text)?.set({ text: event.target.value });
+          (mouseIcon as unknown as fabric.Text)?.set({ text: event.target.value });
           context.textValue = event.target.value;
           canvas.requestRenderAll();
         },

@@ -57,7 +57,13 @@ export const renderCheckbox = ({ id, label, checked, onChange }: CheckboxProps) 
   );
 };
 
-export const renderDropdown = ({ id, label, options, onChange }: DropdownProps) => {
+export const renderDropdown = ({ id, label, options, defaultValue, onChange }: DropdownProps) => {
+  const handleInputCreation = () => {
+    const inputElement = document.getElementById(id) as HTMLInputElement;
+    inputElement.value = defaultValue;
+  };
+
+  setTimeout(handleInputCreation, 0);
   return (
     <div className='mb-4'>
       <label htmlFor={id} className='block text-sm font-medium text-gray-700 mb-1'>

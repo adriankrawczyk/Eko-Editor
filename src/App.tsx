@@ -16,8 +16,14 @@ export interface ContextProps {
   setFontSize: React.Dispatch<React.SetStateAction<number>>;
   angle: number;
   setAngle: React.Dispatch<React.SetStateAction<number>>;
-  size: number;
-  setSize: React.Dispatch<React.SetStateAction<number>>;
+  scaleX: number;
+  setScaleX: React.Dispatch<React.SetStateAction<number>>;
+  scaleY: number;
+  setScaleY: React.Dispatch<React.SetStateAction<number>>;
+  resolution: string;
+  setResolution: React.Dispatch<React.SetStateAction<string>>;
+  photoType: string;
+  setPhotoType: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const Context = createContext<ContextProps>({} as ContextProps);
@@ -28,8 +34,11 @@ const App: React.FC = () => {
   const [textValue, setTextValue] = useState<string>('Text');
   const [fontSize, setFontSize] = useState<number>(32);
   const [angle, setAngle] = useState<number>(0);
-  const [size, setSize] = useState<number>(100);
+  const [scaleX, setScaleX] = useState<number>(1);
+  const [scaleY, setScaleY] = useState<number>(1);
   const [rightbarContent, setRightbarContent] = useState<React.ReactNode>(<></>);
+  const [resolution, setResolution] = useState<string>('1x1');
+  const [photoType, setPhotoType] = useState<string>('Rectangular');
 
   const contextValue: ContextProps = {
     width,
@@ -44,8 +53,14 @@ const App: React.FC = () => {
     setFontSize,
     angle,
     setAngle,
-    size,
-    setSize,
+    scaleX,
+    setScaleX,
+    scaleY,
+    setScaleY,
+    resolution,
+    setResolution,
+    photoType,
+    setPhotoType,
   };
 
   return (

@@ -3,7 +3,7 @@ import { fabric } from 'fabric';
 import { canvas } from '../Canvas/CanvasInstance';
 import { setMouseIcon } from '../Canvas/MouseIcon';
 import { ContextProps } from '../App';
-import { renderButton, renderPhoto } from '../Rightbar/RightbarUtils';
+import { renderButton, renderDropdown, renderPhoto } from '../Rightbar/RightbarUtils';
 import { renderNumericInput } from '../Rightbar/RightbarUtils';
 import { mouseIcon } from '../Canvas/MouseIcon';
 
@@ -20,29 +20,56 @@ const handlePhotoChange = (event: React.ChangeEvent<HTMLInputElement>, context: 
           top: 0,
           opacity: 0,
         });
-        image.scaleToWidth(100);
-
+        const clipPath = new fabric.Rect({
+          width: image.width,
+          height: image.height,
+          left: 0,
+          top: 0,
+        });
+        image.clipPath = clipPath;
+        setMouseIcon(image, context, true);
         canvas.add(image);
-        setMouseIcon(image, context);
       };
     };
     reader.readAsDataURL(file);
   }
 };
 
-const handleSizeChange = (event: React.ChangeEvent<HTMLInputElement>, context: ContextProps) => {
-  const newSize = parseInt(event.target.value);
-  context.size = newSize;
-  const image = mouseIcon as fabric.Image;
-  if (image) {
-    const scaleRatio = newSize / (image.width as number);
-    const newHeight = (image.height as number) * scaleRatio;
-    image.scaleToWidth(newSize);
-    image.scaleToHeight(newHeight);
-    canvas.renderAll();
-  }
-};
 const setPhotoRightbar = (context: ContextProps) => {
+  canvas.discardActiveObject();
+
+  const handlePhotoTypeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    context.photoType = event.target.value;
+
+    const activeObject = canvas.getActiveObject();
+    if (activeObject && activeObject.type === 'image') {
+      const image = activeObject as fabric.Image;
+      if (context.photoType === 'Circular') {
+        const clipPath = new fabric.Circle({
+          radius: (image.width as number) / 2,
+          left: 0,
+          top: 0,
+        });
+        image.clipPath = clipPath;
+      } else {
+        const clipPath = new fabric.Rect({
+          width: image.width,
+          height: image.height,
+          left: 0,
+          top: 0,
+        });
+        image.clipPath = clipPath;
+      }
+      // TO CHANGE
+      image.set({ width: (image.width as number) + 1 });
+      image.set({ width: (image.width as number) - 1 });
+
+      setMouseIcon(image, context, false);
+      canvas.setActiveObject(image);
+      canvas.requestRenderAll();
+    }
+  };
+
   context.setRightbarContent(
     <>
       {renderPhoto({
@@ -53,13 +80,35 @@ const setPhotoRightbar = (context: ContextProps) => {
         },
       })}
       {renderNumericInput({
-        id: 'sizeInput',
-        label: 'Size',
-        defaultValue: context.size.toString(),
-        placeholder: 'Enter size',
+        id: 'scaleXInput',
+        label: 'Scale X',
+        defaultValue: context.scaleX.toString(),
+        placeholder: 'Enter scale X',
         onChange: (e) => {
-          handleSizeChange(e, context);
+          const activeObject = canvas.getActiveObject();
+          if (!activeObject) return;
+          activeObject.set({ scaleX: parseInt(e.target.value) });
+          setMouseIcon(activeObject, context, false);
         },
+      })}
+      {renderNumericInput({
+        id: 'scaleYInput',
+        label: 'Scale Y',
+        defaultValue: context.scaleY.toString(),
+        placeholder: 'Enter scale Y',
+        onChange: (e) => {
+          const activeObject = canvas.getActiveObject();
+          if (!activeObject) return;
+          activeObject.set({ scaleY: parseInt(e.target.value) });
+          setMouseIcon(activeObject, context, false);
+        },
+      })}
+      {renderDropdown({
+        id: 'photoType',
+        label: 'Photo type',
+        options: ['Rectangular', 'Circular'],
+        defaultValue: context.photoType,
+        onChange: handlePhotoTypeChange,
       })}
       {renderButton({
         id: 'myButton',
@@ -71,8 +120,9 @@ const setPhotoRightbar = (context: ContextProps) => {
     </>
   );
 };
+
 const AddPhoto = (context: ContextProps) => {
   setPhotoRightbar(context);
 };
-// eslint-disable-next-line react-refresh/only-export-components
+
 export { AddPhoto, setPhotoRightbar };

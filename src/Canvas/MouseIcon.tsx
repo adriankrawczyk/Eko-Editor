@@ -3,27 +3,32 @@ import { setContextBoxRightbar } from '../Elements/AddContentBox';
 import { setPhotoRightbar } from '../Elements/AddPhoto';
 import { setTextRightbar } from '../Elements/AddText';
 import { canvas } from './CanvasInstance';
+import MouseIconObject from './MouseIconObject';
 
-export let mouseIcon: fabric.Object | null;
+export let mouseIcon: MouseIconObject | null;
 
-export const setMouseIcon = (obj: fabric.Object | null, context: ContextProps) => {
-  mouseIcon = obj;
+export const setMouseIcon = (obj: fabric.Object | null, context: ContextProps, moving: boolean) => {
+  mouseIcon = obj as MouseIconObject;
   if (mouseIcon) {
+    mouseIcon.set({ moving });
     switch (mouseIcon.type) {
       case 'image': {
-        context.size = mouseIcon.width as number;
+        context.scaleX = mouseIcon.scaleX as number;
+        context.scaleY = mouseIcon.scaleY as number;
+        context.photoType = mouseIcon.clipPath && mouseIcon.clipPath.type === 'circle' ? 'Circular' : 'Rectangular';
         setPhotoRightbar(context);
         break;
       }
       case 'rect': {
         context.width = mouseIcon.width as number;
         context.height = mouseIcon.height as number;
+        context.resolution = mouseIcon.resolution || '1:1';
         setContextBoxRightbar(context);
         break;
       }
       case 'text': {
-        context.fontSize = (mouseIcon as fabric.Text).fontSize as number;
-        context.textValue = (mouseIcon as fabric.Text).text as string;
+        context.fontSize = (mouseIcon as unknown as fabric.Text).fontSize as number;
+        context.textValue = (mouseIcon as unknown as fabric.Text).text as string;
         context.angle = mouseIcon.angle as number;
 
         setTextRightbar(context);
@@ -34,7 +39,8 @@ export const setMouseIcon = (obj: fabric.Object | null, context: ContextProps) =
         break;
       }
     }
+    canvas.setActiveObject(mouseIcon);
     canvas.bringToFront(mouseIcon);
     mouseIcon.setCoords();
-  } else context.setRightbarContent(<></>);
+  }
 };

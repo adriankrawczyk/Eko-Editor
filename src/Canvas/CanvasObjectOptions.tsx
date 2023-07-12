@@ -1,4 +1,6 @@
+import MouseIconObject from './MouseIconObject';
+
 interface CanvasObjectOptions extends fabric.ICanvasOptions {
-  mouseIcon: fabric.Object | null;
+  mouseIcon: MouseIconObject | null;
 }
 export default CanvasObjectOptions;
