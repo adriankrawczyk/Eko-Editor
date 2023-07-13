@@ -39,7 +39,7 @@ export const setMouseIcon = (obj: fabric.Object | null, context: ContextProps, m
         break;
       }
     }
-    canvas.setActiveObject(mouseIcon);
+    if (!moving) canvas.setActiveObject(mouseIcon);
     canvas.bringToFront(mouseIcon);
     mouseIcon.setCoords();
   }

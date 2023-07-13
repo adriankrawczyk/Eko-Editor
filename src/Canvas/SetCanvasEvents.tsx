@@ -67,7 +67,7 @@ const SetCanvasEvents = (context: ContextProps) => {
   });
 
   canvas.on('mouse:wheel', (event) => {
-    if (!canvas.viewportTransform) return;
+    if (!canvas.viewportTransform || event.e.ctrlKey) return;
     const delta = event.e.deltaY;
     const viewportTransform = canvas.viewportTransform.slice();
     viewportTransform[5] -= delta / 2;

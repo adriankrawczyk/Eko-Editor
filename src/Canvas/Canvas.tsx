@@ -6,6 +6,7 @@ import { SetCanvas } from './CanvasInstance';
 import SetCanvasEvents from './SetCanvasEvents';
 import { useContext } from 'react';
 import { Context } from '../App';
+import SetZoom from './SetZoom';
 
 let canvas: fabric.Canvas;
 
@@ -29,14 +30,18 @@ const Canvas = () => {
       SetCanvas(canvas);
       SetBackgroundMask('#FFF');
       SetCanvasEvents(context);
+      SetZoom();
     };
 
     handleResize();
-    const isFirstTimeOpening = !localStorage.getItem('appOpenedBefore');
-    if (isFirstTimeOpening) {
-      localStorage.setItem('appOpenedBefore', 'true');
+    const currentVersion = '1.0.0';
+    const storedVersion = localStorage.getItem('appVersion');
+
+    if (storedVersion !== currentVersion) {
+      localStorage.setItem('appVersion', currentVersion);
       window.location.reload();
     }
+
     window.addEventListener('resize', handleResize);
     fabric.util.addListener(document.getElementsByClassName('upper-canvas')[0] as HTMLElement, 'contextmenu', (e: { preventDefault: () => void }) => {
       e.preventDefault();
