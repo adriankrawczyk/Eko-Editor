@@ -1,6 +1,6 @@
 import { fabric } from 'fabric';
 import { canvas } from '../Canvas/CanvasInstance';
-import { renderButton, renderDropdown, renderNumericInput } from '../Rightbar/RightbarUtils';
+import { renderButton, renderColorInput, renderDropdown, renderNumericInput } from '../Rightbar/RightbarUtils';
 import { ContextProps } from '../App';
 import { mouseIcon, setMouseIcon } from '../Canvas/MouseIcon';
 import MouseIconOptions from '../Canvas/MouseIconOptions';
@@ -90,6 +90,18 @@ const setContextBoxRightbar = (context: ContextProps) => {
               break;
             }
           }
+        },
+      })}
+      {renderColorInput({
+        id: 'contentBoxColor',
+        label: 'Color:',
+        defaultValue: context.contentBoxColor,
+        onChange: (e) => {
+          const activeObject = canvas.getActiveObject();
+          const fill = e.target.value.toString() === '#ffffff' ? 'transparent' : e.target.value;
+          activeObject?.set({ fill });
+          setMouseIcon(activeObject, context, false);
+          canvas.requestRenderAll();
         },
       })}
       {renderButton({

@@ -42,6 +42,12 @@ interface ButtonProps {
 interface ColorProps {
   id: string;
   label: string;
+  defaultValue: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
+interface PhotoProps {
+  id: string;
+  label: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 export const renderCheckbox = ({ id, label, checked, onChange }: CheckboxProps) => {
@@ -81,6 +87,12 @@ export const renderDropdown = ({ id, label, options, defaultValue, onChange }: D
 };
 
 export const renderInput = ({ id, label, defaultValue, placeholder, onChange }: InputProps) => {
+  const handleInputCreation = () => {
+    const inputElement = document.getElementById(id) as HTMLInputElement;
+    inputElement.value = defaultValue;
+  };
+
+  setTimeout(handleInputCreation, 0);
   return (
     <div className='mb-4'>
       <label htmlFor={id} className='block text-sm font-medium text-gray-700 mb-1'>
@@ -108,7 +120,7 @@ export const renderNumericInput = ({ id, label, defaultValue, placeholder, onCha
   );
 };
 
-export const renderPhoto = ({ id, label, onChange }: ColorProps) => {
+export const renderPhoto = ({ id, label, onChange }: PhotoProps) => {
   return (
     <div className='mb-4'>
       <label htmlFor={id} className='block text-sm font-medium text-gray-700 mb-1'>
@@ -129,16 +141,23 @@ export const renderSlider = ({ id, label, min, max, step, onChange }: SliderProp
   );
 };
 
-export const renderColor = ({ id, label, onChange }: ColorProps) => {
+export const renderColorInput = ({ id, label, defaultValue, onChange }: ColorProps) => {
+  const handleInputCreation = () => {
+    const inputElement = document.getElementById(id) as HTMLInputElement;
+    inputElement.value = defaultValue;
+  };
+
+  setTimeout(handleInputCreation, 0);
   return (
-    <div className='mb-4'>
-      <label htmlFor={id} className='block text-sm font-medium text-gray-700 mb-1'>
+    <div className='mt-4'>
+      <label htmlFor={id} className='block text-sm font-medium text-gray-700'>
         {label}
       </label>
-      <input id={id} className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500' type='color' onChange={onChange} />
+      <input id={id} type='color' defaultValue={defaultValue} onChange={onChange} className='mb-4 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50' />
     </div>
   );
 };
+
 export const renderButton = ({ id, label, onClick }: ButtonProps): JSX.Element => {
   return (
     <div className='mb-4'>

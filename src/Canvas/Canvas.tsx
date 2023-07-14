@@ -34,7 +34,7 @@ const Canvas = () => {
     };
 
     handleResize();
-    const currentVersion = '1.0.0';
+    const currentVersion = '1.0.1';
     const storedVersion = localStorage.getItem('appVersion');
 
     if (storedVersion !== currentVersion) {

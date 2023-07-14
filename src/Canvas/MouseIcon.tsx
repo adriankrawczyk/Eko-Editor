@@ -23,13 +23,16 @@ export const setMouseIcon = (obj: fabric.Object | null, context: ContextProps, m
         context.width = mouseIcon.width as number;
         context.height = mouseIcon.height as number;
         context.resolution = mouseIcon.resolution || '1:1';
+        context.contentBoxColor = (mouseIcon.fill as string).toUpperCase();
+        if (context.contentBoxColor === 'TRANSPARENT') context.contentBoxColor = '#FFFFFF';
         setContextBoxRightbar(context);
         break;
       }
-      case 'text': {
+      case 'i-text': {
         context.fontSize = (mouseIcon as unknown as fabric.Text).fontSize as number;
         context.textValue = (mouseIcon as unknown as fabric.Text).text as string;
         context.angle = mouseIcon.angle as number;
+        context.textColor = (mouseIcon.fill as string).toUpperCase();
 
         setTextRightbar(context);
         break;

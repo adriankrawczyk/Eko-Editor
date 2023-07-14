@@ -2,23 +2,26 @@ import { fabric } from 'fabric';
 import { canvas } from '../Canvas/CanvasInstance';
 import { setMouseIcon } from '../Canvas/MouseIcon';
 import { ContextProps } from '../App';
-import { renderButton, renderInput, renderNumericInput } from '../Rightbar/RightbarUtils';
+import { renderButton, renderColorInput, renderInput, renderNumericInput } from '../Rightbar/RightbarUtils';
 import { mouseIcon } from '../Canvas/MouseIcon';
 
 const AddText = (context: ContextProps) => {
   canvas.discardActiveObject();
-  const text = new fabric.Text(context.textValue, {
+  const text = new fabric.IText(context.textValue, {
     left: 0,
     top: 0,
     width: context.width,
     height: context.height,
-    fill: 'blue',
+    fill: '#0000FF',
     fontSize: context.fontSize,
     fontFamily: 'arial',
     angle: context.angle,
     opacity: 0,
   });
   canvas.add(text);
+  text.on('changed', () => {
+    setMouseIcon(canvas.getActiveObject(), context, false);
+  });
   setMouseIcon(text, context, true);
 };
 const setTextRightbar = (context: ContextProps) => {
@@ -52,8 +55,21 @@ const setTextRightbar = (context: ContextProps) => {
         defaultValue: context.textValue,
         placeholder: 'Enter text',
         onChange: (event) => {
-          (mouseIcon as unknown as fabric.Text)?.set({ text: event.target.value });
-          context.textValue = event.target.value;
+          const activeObject = canvas.getActiveObject();
+          (activeObject as fabric.Text)?.set({ text: event.target.value });
+          setMouseIcon(activeObject, context, false);
+          canvas.requestRenderAll();
+        },
+      })}
+      {renderColorInput({
+        id: 'textColor',
+        label: 'Color:',
+        defaultValue: context.textColor,
+        onChange: (e) => {
+          const activeObject = canvas.getActiveObject();
+          const fill = e.target.value.toString();
+          activeObject?.set({ fill });
+          setMouseIcon(activeObject, context, false);
           canvas.requestRenderAll();
         },
       })}

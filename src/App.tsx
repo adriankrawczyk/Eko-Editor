@@ -24,6 +24,12 @@ export interface ContextProps {
   setResolution: React.Dispatch<React.SetStateAction<string>>;
   photoType: string;
   setPhotoType: React.Dispatch<React.SetStateAction<string>>;
+  canvasColor: string;
+  setCanvasColor: React.Dispatch<React.SetStateAction<string>>;
+  contentBoxColor: string;
+  setContentBoxColor: React.Dispatch<React.SetStateAction<string>>;
+  textColor: string;
+  setTextColor: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const Context = createContext<ContextProps>({} as ContextProps);
@@ -39,6 +45,9 @@ const App: React.FC = () => {
   const [rightbarContent, setRightbarContent] = useState<React.ReactNode>(<></>);
   const [resolution, setResolution] = useState<string>('1x1');
   const [photoType, setPhotoType] = useState<string>('Rectangular');
+  const [canvasColor, setCanvasColor] = useState<string>('#FFFFFF');
+  const [contentBoxColor, setContentBoxColor] = useState<string>('transparent');
+  const [textColor, setTextColor] = useState<string>('#0000FF');
 
   const contextValue: ContextProps = {
     width,
@@ -61,6 +70,12 @@ const App: React.FC = () => {
     setResolution,
     photoType,
     setPhotoType,
+    canvasColor,
+    setCanvasColor,
+    contentBoxColor,
+    setContentBoxColor,
+    textColor,
+    setTextColor,
   };
 
   return (

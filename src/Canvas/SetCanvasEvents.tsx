@@ -16,7 +16,7 @@ const SetCanvasEvents = (context: ContextProps) => {
       top: pointer.y,
     });
     if (mouseIcon.type === 'rect') StickRect(mouseIcon, pointer);
-    else if (mouseIcon.type === 'text') StickText(mouseIcon, pointer);
+    else if (mouseIcon.type === 'i-text') StickText(mouseIcon, pointer);
     mouseIcon.setCoords();
     canvas.requestRenderAll();
   });
@@ -25,6 +25,7 @@ const SetCanvasEvents = (context: ContextProps) => {
     setMouseIcon(e.target as fabric.Object | null, context, false);
   });
   canvas.on('mouse:dblclick', (e) => {
+    if (!e.target || e.target.type === 'i-text') return;
     setMouseIcon(e.target as fabric.Object | null, context, true);
   });
   canvas.on('selection:cleared', () => {
@@ -32,25 +33,75 @@ const SetCanvasEvents = (context: ContextProps) => {
   });
   canvas.on('object:scaling', (e) => {
     const target = e.target;
-    if (!target) return;
+
+    if (!target || !e.transform || !e.transform) return;
+
     setMouseIcon(target, context, false);
+    const activeControl = e.transform.corner;
     if (target.type !== 'rect') return;
+    convertScale(target);
+    canvas.forEachObject((e) => {
+      if (e === target) return;
+      const eLeft = e.left as number;
+      const targetLeft = target.left as number;
+      const eTop = e.top as number;
+      const targetTop = target.top as number;
+      const eWidth = e.width as number;
+      const targetWidth = target.width as number;
+      const eHeight = e.height as number;
+      const targetHeight = target.height as number;
+      const whichAxisControl = activeControl === 'mr' || activeControl === 'ml' ? 'x' : 'y';
+      const distanceToCenter = whichAxisControl === 'x' ? Math.abs(eLeft - targetLeft) : Math.abs(eTop - targetTop);
+      const distanceWithoutGap = whichAxisControl === 'x' ? (eWidth + targetWidth) / 2 : (eHeight + targetHeight) / 2;
+      const gap = distanceToCenter - distanceWithoutGap;
+      const newTargetDimenion = (whichAxisControl === 'x' ? targetWidth : targetHeight) + gap;
+      if (Math.abs(gap) > 10 || Math.abs(gap) < 2) return;
+      let newTargetAxisValue = 0;
+      switch (activeControl) {
+        case 'mr': {
+          if (eLeft < targetLeft) return;
+          newTargetAxisValue = eLeft - eWidth / 2 - newTargetDimenion / 2;
+          break;
+        }
+        case 'ml': {
+          if (eLeft > targetLeft) return;
+          newTargetAxisValue = eLeft + eWidth / 2 + newTargetDimenion / 2;
+          break;
+        }
+        case 'mb': {
+          if (eTop < targetTop) return;
+          newTargetAxisValue = eTop - eHeight / 2 - newTargetDimenion / 2;
+          break;
+        }
+        case 'mt': {
+          if (eTop > targetTop) return;
+          newTargetAxisValue = eTop + eHeight / 2 + newTargetDimenion / 2;
+          break;
+        }
+      }
+      if (whichAxisControl === 'x') target.set({ width: newTargetDimenion, left: newTargetAxisValue });
+      else target.set({ height: newTargetDimenion, top: newTargetAxisValue });
+    });
     target.set({ strokeWidth: 0 });
   });
+  const convertScale = (target: fabric.Object) => {
+    const scaleX = target.scaleX as number;
+    const scaleY = target.scaleY as number;
+    const width = Math.round((target.width as number) * scaleX);
+    const height = Math.round((target.height as number) * scaleY);
+    target.set({
+      width,
+      height,
+      scaleX: 1,
+      scaleY: 1,
+      strokeWidth: 1,
+    });
+    target.setCoords();
+  };
   canvas.on('mouse:up', () => {
     const target = canvas.getActiveObject();
     if (target && target.strokeWidth === 0 && target.type === 'rect') {
-      const scaleX = target.scaleX as number;
-      const scaleY = target.scaleY as number;
-      const width = Math.round((target.width as number) * scaleX);
-      const height = Math.round((target.height as number) * scaleY);
-      target.set({
-        width,
-        height,
-        scaleX: 1,
-        scaleY: 1,
-        strokeWidth: 1,
-      });
+      convertScale(target);
       setMouseIcon(target, context, false);
     }
   });
