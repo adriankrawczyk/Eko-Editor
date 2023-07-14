@@ -41,7 +41,7 @@ const SetCanvasEvents = (context: ContextProps) => {
     if (target.type !== 'rect') return;
     convertScale(target);
     canvas.forEachObject((e) => {
-      if (e === target) return;
+      if (e === target || e.type !== 'rect') return;
       adjustDimension(target, e, activeControl);
     });
     target.set({ strokeWidth: 0 });
@@ -84,6 +84,9 @@ const SetCanvasEvents = (context: ContextProps) => {
           if (eTop > targetTop) return;
           newTargetAxisValue = eTop + (whichWall === 'first' ? eHeight : -eHeight) / 2 + newTargetDimenion / 2;
           break;
+        }
+        default: {
+          return;
         }
       }
       if (whichAxisControl === 'x') target.set({ width: newTargetDimenion, left: newTargetAxisValue });
