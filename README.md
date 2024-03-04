@@ -1,1 +1,1 @@
-# Using Fabric.js, Vite, React and Typescript
+# Using Fabric.js, Vite, React, Typescript and Tailwindcss
